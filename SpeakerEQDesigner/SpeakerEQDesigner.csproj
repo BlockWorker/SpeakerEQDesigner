@@ -56,6 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BiquadFilter.cs" />
+    <Compile Include="DoubleFilteredResponseSeries.cs" />
     <Compile Include="LogFunctionSeries.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>

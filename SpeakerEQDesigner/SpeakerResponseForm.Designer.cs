@@ -174,9 +174,11 @@
             this.okButton.TabIndex = 9;
             this.okButton.Text = "OK";
             this.okButton.UseVisualStyleBackColor = true;
+            this.okButton.Click += new System.EventHandler(this.okButton_Click);
             // 
             // insertButton
             // 
+            this.insertButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.insertButton.Location = new System.Drawing.Point(411, 441);
             this.insertButton.Name = "insertButton";
             this.insertButton.Size = new System.Drawing.Size(115, 23);
@@ -187,6 +189,7 @@
             // 
             // pointNumberLabel
             // 
+            this.pointNumberLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.pointNumberLabel.AutoSize = true;
             this.pointNumberLabel.Location = new System.Drawing.Point(108, 443);
             this.pointNumberLabel.Name = "pointNumberLabel";
@@ -196,6 +199,7 @@
             // 
             // deleteButton
             // 
+            this.deleteButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.deleteButton.Enabled = false;
             this.deleteButton.Location = new System.Drawing.Point(411, 467);
             this.deleteButton.Name = "deleteButton";

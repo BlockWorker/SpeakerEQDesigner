@@ -17,6 +17,7 @@ namespace SpeakerEQDesigner {
         private LinearAxis splAxis;
         private LineSeries series;
         private int currPoint = 0;
+        public int speaker = 0;
 
         public SpeakerResponseForm() {
             InitializeComponent();
@@ -25,10 +26,12 @@ namespace SpeakerEQDesigner {
             response.Add(new DPoint(30000, 90));
         }
 
-        public SpeakerResponseForm(List<DPoint> _response) {
+        public SpeakerResponseForm(List<DPoint> _response, int spk) {
+            InitializeComponent();
             response = _response;
             pointNumberLabel.Text = response.Count.ToString();
             pointSelect.Maximum = response.Count;
+            speaker = spk;
         }
 
         private void SpeakerResponseForm_Load(object sender, EventArgs e) {
@@ -105,12 +108,21 @@ namespace SpeakerEQDesigner {
 
         private void deleteButton_Click(object sender, EventArgs e) {
             response.RemoveAt(currPoint);
+            pointNumberLabel.Text = response.Count.ToString();
+            pointSelect.Maximum = response.Count;
             pointSelect_ValueChanged();
             plotView.InvalidatePlot(true);
+        }
+
+        private void okButton_Click(object sender, EventArgs e) {
+            (Owner as MainForm).UpdateResponse(speaker);
+            Close();
         }
     }
 
     public class DPoint {
+        public DPoint() : this(0, 0) { }
+
         public DPoint(decimal x, decimal y) {
             X = x;
             Y = y;

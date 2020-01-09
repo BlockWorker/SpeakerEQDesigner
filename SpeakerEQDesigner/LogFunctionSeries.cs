@@ -49,5 +49,10 @@ namespace SpeakerEQDesigner {
             }
             Points.Add(new DataPoint((double)upLim, (double)func(upLim)));
         }
+
+        protected override void UpdateData() {
+            UpdateFunc(func, lowLim, upLim, step);
+            base.UpdateData();
+        }
     }
 }
