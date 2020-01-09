@@ -132,14 +132,14 @@ namespace SpeakerEQDesigner {
             a2 = FromFP(FP_a2);
         }
 
-        public decimal Response(decimal f) {
-            var w = DecimalEx.TwoPi * f / SampleRate;
-            var cosw = DecimalEx.Cos(w);
-            var cos2w = DecimalEx.Cos(2 * w);
-            var num = b0 * b0 + b1 * b1 + b2 * b2 + 2 * (b0 * b1 + b1 * b2) * cosw + 2 * b0 * b2 * cos2w;
-            var denom = NegateA ? 1 + a1 * a1 + a2 * a2 - 2 * (a1 - a1 * a2) * cosw - 2 * a2 * cos2w : 
-                1 + a1 * a1 + a2 * a2 + 2 * (a1 + a1 * a2) * cosw + 2 * a2 * cos2w;
-            return 20m * DecimalEx.Log10(DecimalEx.Sqrt(num / denom));
+        public double Response(double f) {
+            var w = 2d * Math.PI * f / (double)SampleRate;
+            var cosw = Math.Cos(w);
+            var cos2w = Math.Cos(2d * w);
+            var num = (double)(b0 * b0 + b1 * b1 + b2 * b2) + 2d * (double)(b0 * b1 + b1 * b2) * cosw + 2d * (double)(b0 * b2) * cos2w;
+            var denom = NegateA ? 1d + (double)(a1 * a1 + a2 * a2) - 2d * (double)(a1 - a1 * a2) * cosw - 2 * (double)a2 * cos2w : 
+                1 + (double)(a1 * a1 + a2 * a2) + 2 * (double)(a1 + a1 * a2) * cosw + 2 * (double)a2 * cos2w;
+            return 20d * Math.Log10(Math.Sqrt(num / denom));
         }
     }
 

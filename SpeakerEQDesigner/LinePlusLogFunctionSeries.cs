@@ -16,35 +16,35 @@ namespace SpeakerEQDesigner {
             set { UpdateFunc(value, func, lowLim, upLim, step); }
         }
 
-        private Func<decimal, decimal> func;
-        public Func<decimal, decimal> Function {
+        private Func<double, double> func;
+        public Func<double, double> Function {
             get { return func; }
             set { UpdateFunc(lineSeries, value, lowLim, upLim, step); }
         }
 
-        private decimal lowLim;
-        public decimal LowerLimit {
+        private double lowLim;
+        public double LowerLimit {
             get { return lowLim; }
             set { UpdateFunc(lineSeries, func, value, upLim, step); }
         }
 
-        private decimal upLim;
-        public decimal UpperLimit {
+        private double upLim;
+        public double UpperLimit {
             get { return upLim; }
             set { UpdateFunc(lineSeries, func, lowLim, value, step); }
         }
 
-        private decimal step;
-        public decimal Step {
+        private double step;
+        public double Step {
             get { return step; }
             set { UpdateFunc(lineSeries, func, lowLim, upLim, value); }
         }
 
-        public LinePlusLogFunctionSeries(List<DPoint> linePts, Func<decimal, decimal> f, decimal lowerLim, decimal upperLim, decimal logStep) {
+        public LinePlusLogFunctionSeries(List<DPoint> linePts, Func<double, double> f, double lowerLim, double upperLim, double logStep) {
             UpdateFunc(linePts, f, lowerLim, upperLim, logStep);
         }
 
-        private void UpdateFunc(List<DPoint> linePts, Func<decimal, decimal> f, decimal lowerLim, decimal upperLim, decimal logStep) {
+        private void UpdateFunc(List<DPoint> linePts, Func<double, double> f, double lowerLim, double upperLim, double logStep) {
             lineSeries = linePts;
             func = f;
             lowLim = lowerLim;
@@ -53,29 +53,29 @@ namespace SpeakerEQDesigner {
 
             Points.Clear();
             int lpIndex = 0;
-            decimal lpIntercept = 0m;
-            decimal lpSlope = 0m;
+            double lpIntercept = 0d;
+            double lpSlope = 0d;
 
-            for (decimal x = lowerLim; x < upLim * logStep; x *= logStep) {
+            for (double x = lowerLim; x < upLim * logStep; x *= logStep) {
                 if (x > upLim) x = upLim;
 
-                decimal lineValue = 0;
+                double lineValue = 0;
                 
                 if (lineSeries[lpIndex].X <= x) {
                     while (lpIndex < lineSeries.Count && lineSeries[lpIndex].X <= x) lpIndex++;
                     if (lpIndex < lineSeries.Count) {
                         var cp = lineSeries[lpIndex - 1];
                         var np = lineSeries[lpIndex];
-                        lpSlope = (np.Y - cp.Y) / DecimalEx.Log10(np.X / cp.X);
-                        lpIntercept = cp.Y - lpSlope * DecimalEx.Log10(cp.X);
+                        lpSlope = (np.Y - cp.Y) / Math.Log10(np.X / cp.X);
+                        lpIntercept = cp.Y - lpSlope * Math.Log10(cp.X);
                     }
                 }
 
                 if (lpIndex == 0 && lineSeries[0].X >= x) lineValue = lineSeries[0].Y;
-                else if (lpIndex < lineSeries.Count) lineValue = lpIntercept + lpSlope * (DecimalEx.Log10(x));
+                else if (lpIndex < lineSeries.Count) lineValue = lpIntercept + lpSlope * (Math.Log10(x));
                 else lineValue = lineSeries.Last().Y;
 
-                Points.Add(new DataPoint((double)x, (double)(func(x) + lineValue)));
+                Points.Add(new DataPoint(x, (func(x) + lineValue)));
             }
         }
 

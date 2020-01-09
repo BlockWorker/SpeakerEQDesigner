@@ -25,6 +25,10 @@
         private void InitializeComponent() {
             this.sumPlotView = new OxyPlot.WindowsForms.PlotView();
             this.mainSplit = new System.Windows.Forms.SplitContainer();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.s2TableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.s2Panel1 = new System.Windows.Forms.Panel();
@@ -82,6 +86,8 @@
             this.s1FiltSelect = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.s1Panel2 = new System.Windows.Forms.Panel();
+            this.label17 = new System.Windows.Forms.Label();
+            this.s1SpkGainSelect = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
             this.s1b0Hex = new System.Windows.Forms.TextBox();
             this.s1SRSelect = new System.Windows.Forms.NumericUpDown();
@@ -100,16 +106,15 @@
             this.label8 = new System.Windows.Forms.Label();
             this.s1a1Select = new System.Windows.Forms.NumericUpDown();
             this.s1b2Hex = new System.Windows.Forms.TextBox();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveDialog = new System.Windows.Forms.SaveFileDialog();
-            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label19 = new System.Windows.Forms.Label();
+            this.s2SpkGainSelect = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.mainSplit)).BeginInit();
             this.mainSplit.Panel1.SuspendLayout();
             this.mainSplit.Panel2.SuspendLayout();
             this.mainSplit.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.mainTableLayoutPanel.SuspendLayout();
             this.s2TableLayoutPanel.SuspendLayout();
             this.s2Panel1.SuspendLayout();
@@ -133,13 +138,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.s1FreqSelect)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.s1FiltSelect)).BeginInit();
             this.s1Panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.s1SpkGainSelect)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.s1SRSelect)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.s1b0Select)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.s1b1Select)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.s1a2Select)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.s1b2Select)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.s1a1Select)).BeginInit();
-            this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.s2SpkGainSelect)).BeginInit();
             this.SuspendLayout();
             // 
             // sumPlotView
@@ -149,7 +155,7 @@
             this.sumPlotView.Location = new System.Drawing.Point(0, 24);
             this.sumPlotView.Name = "sumPlotView";
             this.sumPlotView.PanCursor = System.Windows.Forms.Cursors.Hand;
-            this.sumPlotView.Size = new System.Drawing.Size(854, 258);
+            this.sumPlotView.Size = new System.Drawing.Size(954, 274);
             this.sumPlotView.TabIndex = 0;
             this.sumPlotView.Text = "plotView1";
             this.sumPlotView.ZoomHorizontalCursor = System.Windows.Forms.Cursors.SizeWE;
@@ -171,9 +177,42 @@
             // mainSplit.Panel2
             // 
             this.mainSplit.Panel2.Controls.Add(this.mainTableLayoutPanel);
-            this.mainSplit.Size = new System.Drawing.Size(854, 625);
-            this.mainSplit.SplitterDistance = 282;
+            this.mainSplit.Size = new System.Drawing.Size(954, 661);
+            this.mainSplit.SplitterDistance = 298;
             this.mainSplit.TabIndex = 2;
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(954, 24);
+            this.menuStrip1.TabIndex = 1;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.saveToolStripMenuItem,
+            this.loadToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "&File";
+            // 
+            // saveToolStripMenuItem
+            // 
+            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            // 
+            // loadToolStripMenuItem
+            // 
+            this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.loadToolStripMenuItem.Text = "Load";
+            this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
             // mainTableLayoutPanel
             // 
@@ -191,7 +230,7 @@
             this.mainTableLayoutPanel.RowCount = 2;
             this.mainTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.mainTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 195F));
-            this.mainTableLayoutPanel.Size = new System.Drawing.Size(854, 339);
+            this.mainTableLayoutPanel.Size = new System.Drawing.Size(954, 359);
             this.mainTableLayoutPanel.TabIndex = 0;
             // 
             // s2TableLayoutPanel
@@ -202,11 +241,11 @@
             this.s2TableLayoutPanel.Controls.Add(this.s2Panel1, 0, 0);
             this.s2TableLayoutPanel.Controls.Add(this.s2Panel2, 1, 0);
             this.s2TableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.s2TableLayoutPanel.Location = new System.Drawing.Point(430, 146);
+            this.s2TableLayoutPanel.Location = new System.Drawing.Point(480, 166);
             this.s2TableLayoutPanel.Name = "s2TableLayoutPanel";
             this.s2TableLayoutPanel.RowCount = 1;
             this.s2TableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.s2TableLayoutPanel.Size = new System.Drawing.Size(420, 189);
+            this.s2TableLayoutPanel.Size = new System.Drawing.Size(470, 189);
             this.s2TableLayoutPanel.TabIndex = 5;
             // 
             // s2Panel1
@@ -228,7 +267,7 @@
             this.s2Panel1.Location = new System.Drawing.Point(0, 0);
             this.s2Panel1.Margin = new System.Windows.Forms.Padding(0);
             this.s2Panel1.Name = "s2Panel1";
-            this.s2Panel1.Size = new System.Drawing.Size(189, 189);
+            this.s2Panel1.Size = new System.Drawing.Size(211, 189);
             this.s2Panel1.TabIndex = 0;
             // 
             // s2QCrit
@@ -256,7 +295,7 @@
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(125, 30);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(147, 30);
             this.tableLayoutPanel3.TabIndex = 13;
             // 
             // s2FiltAdd
@@ -264,7 +303,7 @@
             this.s2FiltAdd.Dock = System.Windows.Forms.DockStyle.Fill;
             this.s2FiltAdd.Location = new System.Drawing.Point(3, 3);
             this.s2FiltAdd.Name = "s2FiltAdd";
-            this.s2FiltAdd.Size = new System.Drawing.Size(50, 24);
+            this.s2FiltAdd.Size = new System.Drawing.Size(60, 24);
             this.s2FiltAdd.TabIndex = 2;
             this.s2FiltAdd.Tag = 1;
             this.s2FiltAdd.Text = "Add";
@@ -274,9 +313,9 @@
             // s2FiltRemove
             // 
             this.s2FiltRemove.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.s2FiltRemove.Location = new System.Drawing.Point(59, 3);
+            this.s2FiltRemove.Location = new System.Drawing.Point(69, 3);
             this.s2FiltRemove.Name = "s2FiltRemove";
-            this.s2FiltRemove.Size = new System.Drawing.Size(63, 24);
+            this.s2FiltRemove.Size = new System.Drawing.Size(75, 24);
             this.s2FiltRemove.TabIndex = 3;
             this.s2FiltRemove.Tag = 1;
             this.s2FiltRemove.Text = "Remove";
@@ -325,11 +364,12 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.s2SpkResponse.Location = new System.Drawing.Point(56, 164);
             this.s2SpkResponse.Name = "s2SpkResponse";
-            this.s2SpkResponse.Size = new System.Drawing.Size(125, 23);
+            this.s2SpkResponse.Size = new System.Drawing.Size(147, 23);
             this.s2SpkResponse.TabIndex = 8;
             this.s2SpkResponse.Tag = 1;
             this.s2SpkResponse.Text = "Speaker Response...";
             this.s2SpkResponse.UseVisualStyleBackColor = true;
+            this.s2SpkResponse.Click += new System.EventHandler(this.SpkResponse_Click);
             // 
             // s2GainSelect
             // 
@@ -349,7 +389,7 @@
             0,
             -2147483648});
             this.s2GainSelect.Name = "s2GainSelect";
-            this.s2GainSelect.Size = new System.Drawing.Size(125, 20);
+            this.s2GainSelect.Size = new System.Drawing.Size(147, 20);
             this.s2GainSelect.TabIndex = 7;
             this.s2GainSelect.Tag = 33;
             this.s2GainSelect.ValueChanged += new System.EventHandler(this.FiltParamSelect_ValueChanged);
@@ -372,7 +412,7 @@
             0,
             131072});
             this.s2QSelect.Name = "s2QSelect";
-            this.s2QSelect.Size = new System.Drawing.Size(125, 20);
+            this.s2QSelect.Size = new System.Drawing.Size(147, 20);
             this.s2QSelect.TabIndex = 6;
             this.s2QSelect.Tag = 17;
             this.s2QSelect.Value = new decimal(new int[] {
@@ -394,7 +434,7 @@
             0,
             0});
             this.s2FreqSelect.Name = "s2FreqSelect";
-            this.s2FreqSelect.Size = new System.Drawing.Size(125, 20);
+            this.s2FreqSelect.Size = new System.Drawing.Size(147, 20);
             this.s2FreqSelect.TabIndex = 5;
             this.s2FreqSelect.Tag = 1;
             this.s2FreqSelect.Value = new decimal(new int[] {
@@ -421,7 +461,7 @@
             "Custom"});
             this.s2TypeSelect.Location = new System.Drawing.Point(56, 59);
             this.s2TypeSelect.Name = "s2TypeSelect";
-            this.s2TypeSelect.Size = new System.Drawing.Size(125, 21);
+            this.s2TypeSelect.Size = new System.Drawing.Size(147, 21);
             this.s2TypeSelect.TabIndex = 4;
             this.s2TypeSelect.Tag = 1;
             this.s2TypeSelect.Text = "Disabled";
@@ -443,7 +483,7 @@
             0,
             0});
             this.s2FiltSelect.Name = "s2FiltSelect";
-            this.s2FiltSelect.Size = new System.Drawing.Size(125, 20);
+            this.s2FiltSelect.Size = new System.Drawing.Size(147, 20);
             this.s2FiltSelect.TabIndex = 1;
             this.s2FiltSelect.Tag = 1;
             this.s2FiltSelect.Value = new decimal(new int[] {
@@ -464,6 +504,8 @@
             // 
             // s2Panel2
             // 
+            this.s2Panel2.Controls.Add(this.label19);
+            this.s2Panel2.Controls.Add(this.s2SpkGainSelect);
             this.s2Panel2.Controls.Add(this.label15);
             this.s2Panel2.Controls.Add(this.s2b0Hex);
             this.s2Panel2.Controls.Add(this.s2SRSelect);
@@ -483,17 +525,17 @@
             this.s2Panel2.Controls.Add(this.s2a1Select);
             this.s2Panel2.Controls.Add(this.s2b2Hex);
             this.s2Panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.s2Panel2.Location = new System.Drawing.Point(189, 0);
+            this.s2Panel2.Location = new System.Drawing.Point(211, 0);
             this.s2Panel2.Margin = new System.Windows.Forms.Padding(0);
             this.s2Panel2.Name = "s2Panel2";
-            this.s2Panel2.Size = new System.Drawing.Size(231, 189);
+            this.s2Panel2.Size = new System.Drawing.Size(259, 189);
             this.s2Panel2.TabIndex = 2;
             // 
             // label15
             // 
             this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(9, 160);
+            this.label15.Location = new System.Drawing.Point(37, 160);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(93, 13);
             this.label15.TabIndex = 30;
@@ -502,7 +544,7 @@
             // s2b0Hex
             // 
             this.s2b0Hex.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.s2b0Hex.Location = new System.Drawing.Point(164, 3);
+            this.s2b0Hex.Location = new System.Drawing.Point(192, 3);
             this.s2b0Hex.Name = "s2b0Hex";
             this.s2b0Hex.ReadOnly = true;
             this.s2b0Hex.Size = new System.Drawing.Size(64, 20);
@@ -512,7 +554,7 @@
             // s2SRSelect
             // 
             this.s2SRSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.s2SRSelect.Location = new System.Drawing.Point(108, 158);
+            this.s2SRSelect.Location = new System.Drawing.Point(136, 158);
             this.s2SRSelect.Maximum = new decimal(new int[] {
             400000,
             0,
@@ -557,7 +599,7 @@
             0,
             -2147483648});
             this.s2b0Select.Name = "s2b0Select";
-            this.s2b0Select.Size = new System.Drawing.Size(124, 20);
+            this.s2b0Select.Size = new System.Drawing.Size(152, 20);
             this.s2b0Select.TabIndex = 13;
             this.s2b0Select.Tag = 49;
             this.s2b0Select.Value = new decimal(new int[] {
@@ -593,7 +635,7 @@
             // s2a2Hex
             // 
             this.s2a2Hex.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.s2a2Hex.Location = new System.Drawing.Point(164, 107);
+            this.s2a2Hex.Location = new System.Drawing.Point(192, 107);
             this.s2a2Hex.Name = "s2a2Hex";
             this.s2a2Hex.ReadOnly = true;
             this.s2a2Hex.Size = new System.Drawing.Size(64, 20);
@@ -623,7 +665,7 @@
             0,
             -2147483648});
             this.s2b1Select.Name = "s2b1Select";
-            this.s2b1Select.Size = new System.Drawing.Size(124, 20);
+            this.s2b1Select.Size = new System.Drawing.Size(152, 20);
             this.s2b1Select.TabIndex = 16;
             this.s2b1Select.Tag = 65;
             this.s2b1Select.ValueChanged += new System.EventHandler(this.FiltParamSelect_ValueChanged);
@@ -669,7 +711,7 @@
             0,
             -2147483648});
             this.s2a2Select.Name = "s2a2Select";
-            this.s2a2Select.Size = new System.Drawing.Size(124, 20);
+            this.s2a2Select.Size = new System.Drawing.Size(152, 20);
             this.s2a2Select.TabIndex = 25;
             this.s2a2Select.Tag = 113;
             this.s2a2Select.ValueChanged += new System.EventHandler(this.FiltParamSelect_ValueChanged);
@@ -677,7 +719,7 @@
             // s2b1Hex
             // 
             this.s2b1Hex.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.s2b1Hex.Location = new System.Drawing.Point(164, 29);
+            this.s2b1Hex.Location = new System.Drawing.Point(192, 29);
             this.s2b1Hex.Name = "s2b1Hex";
             this.s2b1Hex.ReadOnly = true;
             this.s2b1Hex.Size = new System.Drawing.Size(64, 20);
@@ -687,7 +729,7 @@
             // s2a1Hex
             // 
             this.s2a1Hex.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.s2a1Hex.Location = new System.Drawing.Point(164, 81);
+            this.s2a1Hex.Location = new System.Drawing.Point(192, 81);
             this.s2a1Hex.Name = "s2a1Hex";
             this.s2a1Hex.ReadOnly = true;
             this.s2a1Hex.Size = new System.Drawing.Size(64, 20);
@@ -717,7 +759,7 @@
             0,
             -2147483648});
             this.s2b2Select.Name = "s2b2Select";
-            this.s2b2Select.Size = new System.Drawing.Size(124, 20);
+            this.s2b2Select.Size = new System.Drawing.Size(152, 20);
             this.s2b2Select.TabIndex = 19;
             this.s2b2Select.Tag = 81;
             this.s2b2Select.ValueChanged += new System.EventHandler(this.FiltParamSelect_ValueChanged);
@@ -763,7 +805,7 @@
             0,
             -2147483648});
             this.s2a1Select.Name = "s2a1Select";
-            this.s2a1Select.Size = new System.Drawing.Size(124, 20);
+            this.s2a1Select.Size = new System.Drawing.Size(152, 20);
             this.s2a1Select.TabIndex = 22;
             this.s2a1Select.Tag = 97;
             this.s2a1Select.ValueChanged += new System.EventHandler(this.FiltParamSelect_ValueChanged);
@@ -771,7 +813,7 @@
             // s2b2Hex
             // 
             this.s2b2Hex.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.s2b2Hex.Location = new System.Drawing.Point(164, 55);
+            this.s2b2Hex.Location = new System.Drawing.Point(192, 55);
             this.s2b2Hex.Name = "s2b2Hex";
             this.s2b2Hex.ReadOnly = true;
             this.s2b2Hex.Size = new System.Drawing.Size(64, 20);
@@ -782,10 +824,10 @@
             // 
             this.s2PlotView.BackColor = System.Drawing.Color.White;
             this.s2PlotView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.s2PlotView.Location = new System.Drawing.Point(430, 4);
+            this.s2PlotView.Location = new System.Drawing.Point(480, 4);
             this.s2PlotView.Name = "s2PlotView";
             this.s2PlotView.PanCursor = System.Windows.Forms.Cursors.Hand;
-            this.s2PlotView.Size = new System.Drawing.Size(420, 135);
+            this.s2PlotView.Size = new System.Drawing.Size(470, 155);
             this.s2PlotView.TabIndex = 4;
             this.s2PlotView.Text = "plotView1";
             this.s2PlotView.ZoomHorizontalCursor = System.Windows.Forms.Cursors.SizeWE;
@@ -799,7 +841,7 @@
             this.s1PlotView.Location = new System.Drawing.Point(4, 4);
             this.s1PlotView.Name = "s1PlotView";
             this.s1PlotView.PanCursor = System.Windows.Forms.Cursors.Hand;
-            this.s1PlotView.Size = new System.Drawing.Size(419, 135);
+            this.s1PlotView.Size = new System.Drawing.Size(469, 155);
             this.s1PlotView.TabIndex = 1;
             this.s1PlotView.Text = "plotView1";
             this.s1PlotView.ZoomHorizontalCursor = System.Windows.Forms.Cursors.SizeWE;
@@ -814,11 +856,11 @@
             this.s1TableLayoutPanel.Controls.Add(this.s1Panel1, 0, 0);
             this.s1TableLayoutPanel.Controls.Add(this.s1Panel2, 1, 0);
             this.s1TableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.s1TableLayoutPanel.Location = new System.Drawing.Point(4, 146);
+            this.s1TableLayoutPanel.Location = new System.Drawing.Point(4, 166);
             this.s1TableLayoutPanel.Name = "s1TableLayoutPanel";
             this.s1TableLayoutPanel.RowCount = 1;
             this.s1TableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.s1TableLayoutPanel.Size = new System.Drawing.Size(419, 189);
+            this.s1TableLayoutPanel.Size = new System.Drawing.Size(469, 189);
             this.s1TableLayoutPanel.TabIndex = 3;
             // 
             // s1Panel1
@@ -840,7 +882,7 @@
             this.s1Panel1.Location = new System.Drawing.Point(0, 0);
             this.s1Panel1.Margin = new System.Windows.Forms.Padding(0);
             this.s1Panel1.Name = "s1Panel1";
-            this.s1Panel1.Size = new System.Drawing.Size(188, 189);
+            this.s1Panel1.Size = new System.Drawing.Size(211, 189);
             this.s1Panel1.TabIndex = 0;
             // 
             // s1QCrit
@@ -868,7 +910,7 @@
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 1;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(124, 30);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(147, 30);
             this.tableLayoutPanel2.TabIndex = 13;
             // 
             // s1FiltAdd
@@ -876,7 +918,7 @@
             this.s1FiltAdd.Dock = System.Windows.Forms.DockStyle.Fill;
             this.s1FiltAdd.Location = new System.Drawing.Point(3, 3);
             this.s1FiltAdd.Name = "s1FiltAdd";
-            this.s1FiltAdd.Size = new System.Drawing.Size(49, 24);
+            this.s1FiltAdd.Size = new System.Drawing.Size(60, 24);
             this.s1FiltAdd.TabIndex = 2;
             this.s1FiltAdd.Tag = 0;
             this.s1FiltAdd.Text = "Add";
@@ -886,9 +928,9 @@
             // s1FiltRemove
             // 
             this.s1FiltRemove.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.s1FiltRemove.Location = new System.Drawing.Point(58, 3);
+            this.s1FiltRemove.Location = new System.Drawing.Point(69, 3);
             this.s1FiltRemove.Name = "s1FiltRemove";
-            this.s1FiltRemove.Size = new System.Drawing.Size(63, 24);
+            this.s1FiltRemove.Size = new System.Drawing.Size(75, 24);
             this.s1FiltRemove.TabIndex = 3;
             this.s1FiltRemove.Tag = 0;
             this.s1FiltRemove.Text = "Remove";
@@ -937,7 +979,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.s1SpkResponse.Location = new System.Drawing.Point(56, 164);
             this.s1SpkResponse.Name = "s1SpkResponse";
-            this.s1SpkResponse.Size = new System.Drawing.Size(124, 23);
+            this.s1SpkResponse.Size = new System.Drawing.Size(147, 23);
             this.s1SpkResponse.TabIndex = 8;
             this.s1SpkResponse.Tag = 0;
             this.s1SpkResponse.Text = "Speaker Response...";
@@ -962,7 +1004,7 @@
             0,
             -2147483648});
             this.s1GainSelect.Name = "s1GainSelect";
-            this.s1GainSelect.Size = new System.Drawing.Size(124, 20);
+            this.s1GainSelect.Size = new System.Drawing.Size(147, 20);
             this.s1GainSelect.TabIndex = 7;
             this.s1GainSelect.Tag = 32;
             this.s1GainSelect.ValueChanged += new System.EventHandler(this.FiltParamSelect_ValueChanged);
@@ -985,7 +1027,7 @@
             0,
             131072});
             this.s1QSelect.Name = "s1QSelect";
-            this.s1QSelect.Size = new System.Drawing.Size(124, 20);
+            this.s1QSelect.Size = new System.Drawing.Size(147, 20);
             this.s1QSelect.TabIndex = 6;
             this.s1QSelect.Tag = 16;
             this.s1QSelect.Value = new decimal(new int[] {
@@ -1007,7 +1049,7 @@
             0,
             0});
             this.s1FreqSelect.Name = "s1FreqSelect";
-            this.s1FreqSelect.Size = new System.Drawing.Size(124, 20);
+            this.s1FreqSelect.Size = new System.Drawing.Size(147, 20);
             this.s1FreqSelect.TabIndex = 5;
             this.s1FreqSelect.Tag = 0;
             this.s1FreqSelect.Value = new decimal(new int[] {
@@ -1034,7 +1076,7 @@
             "Custom"});
             this.s1TypeSelect.Location = new System.Drawing.Point(56, 59);
             this.s1TypeSelect.Name = "s1TypeSelect";
-            this.s1TypeSelect.Size = new System.Drawing.Size(124, 21);
+            this.s1TypeSelect.Size = new System.Drawing.Size(147, 21);
             this.s1TypeSelect.TabIndex = 4;
             this.s1TypeSelect.Tag = 0;
             this.s1TypeSelect.Text = "Disabled";
@@ -1056,7 +1098,7 @@
             0,
             0});
             this.s1FiltSelect.Name = "s1FiltSelect";
-            this.s1FiltSelect.Size = new System.Drawing.Size(124, 20);
+            this.s1FiltSelect.Size = new System.Drawing.Size(147, 20);
             this.s1FiltSelect.TabIndex = 1;
             this.s1FiltSelect.Tag = 0;
             this.s1FiltSelect.Value = new decimal(new int[] {
@@ -1077,6 +1119,8 @@
             // 
             // s1Panel2
             // 
+            this.s1Panel2.Controls.Add(this.label17);
+            this.s1Panel2.Controls.Add(this.s1SpkGainSelect);
             this.s1Panel2.Controls.Add(this.label9);
             this.s1Panel2.Controls.Add(this.s1b0Hex);
             this.s1Panel2.Controls.Add(this.s1SRSelect);
@@ -1096,17 +1140,48 @@
             this.s1Panel2.Controls.Add(this.s1a1Select);
             this.s1Panel2.Controls.Add(this.s1b2Hex);
             this.s1Panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.s1Panel2.Location = new System.Drawing.Point(188, 0);
+            this.s1Panel2.Location = new System.Drawing.Point(211, 0);
             this.s1Panel2.Margin = new System.Windows.Forms.Padding(0);
             this.s1Panel2.Name = "s1Panel2";
-            this.s1Panel2.Size = new System.Drawing.Size(231, 189);
+            this.s1Panel2.Size = new System.Drawing.Size(258, 189);
             this.s1Panel2.TabIndex = 2;
+            // 
+            // label17
+            // 
+            this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(132, 135);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(54, 13);
+            this.label17.TabIndex = 31;
+            this.label17.Text = "Gain (dB):";
+            // 
+            // s1SpkGainSelect
+            // 
+            this.s1SpkGainSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.s1SpkGainSelect.DecimalPlaces = 1;
+            this.s1SpkGainSelect.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.s1SpkGainSelect.Location = new System.Drawing.Point(191, 133);
+            this.s1SpkGainSelect.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.s1SpkGainSelect.Name = "s1SpkGainSelect";
+            this.s1SpkGainSelect.Size = new System.Drawing.Size(64, 20);
+            this.s1SpkGainSelect.TabIndex = 3;
+            this.s1SpkGainSelect.Tag = 0;
+            this.s1SpkGainSelect.ValueChanged += new System.EventHandler(this.SpkGainSelect_ValueChanged);
             // 
             // label9
             // 
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(9, 160);
+            this.label9.Location = new System.Drawing.Point(36, 160);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(93, 13);
             this.label9.TabIndex = 30;
@@ -1115,7 +1190,7 @@
             // s1b0Hex
             // 
             this.s1b0Hex.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.s1b0Hex.Location = new System.Drawing.Point(164, 3);
+            this.s1b0Hex.Location = new System.Drawing.Point(191, 3);
             this.s1b0Hex.Name = "s1b0Hex";
             this.s1b0Hex.ReadOnly = true;
             this.s1b0Hex.Size = new System.Drawing.Size(64, 20);
@@ -1125,7 +1200,7 @@
             // s1SRSelect
             // 
             this.s1SRSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.s1SRSelect.Location = new System.Drawing.Point(108, 158);
+            this.s1SRSelect.Location = new System.Drawing.Point(135, 158);
             this.s1SRSelect.Maximum = new decimal(new int[] {
             400000,
             0,
@@ -1170,7 +1245,7 @@
             0,
             -2147483648});
             this.s1b0Select.Name = "s1b0Select";
-            this.s1b0Select.Size = new System.Drawing.Size(124, 20);
+            this.s1b0Select.Size = new System.Drawing.Size(151, 20);
             this.s1b0Select.TabIndex = 13;
             this.s1b0Select.Tag = 48;
             this.s1b0Select.Value = new decimal(new int[] {
@@ -1206,7 +1281,7 @@
             // s1a2Hex
             // 
             this.s1a2Hex.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.s1a2Hex.Location = new System.Drawing.Point(164, 107);
+            this.s1a2Hex.Location = new System.Drawing.Point(191, 107);
             this.s1a2Hex.Name = "s1a2Hex";
             this.s1a2Hex.ReadOnly = true;
             this.s1a2Hex.Size = new System.Drawing.Size(64, 20);
@@ -1236,7 +1311,7 @@
             0,
             -2147483648});
             this.s1b1Select.Name = "s1b1Select";
-            this.s1b1Select.Size = new System.Drawing.Size(124, 20);
+            this.s1b1Select.Size = new System.Drawing.Size(151, 20);
             this.s1b1Select.TabIndex = 16;
             this.s1b1Select.Tag = 64;
             this.s1b1Select.ValueChanged += new System.EventHandler(this.FiltParamSelect_ValueChanged);
@@ -1282,7 +1357,7 @@
             0,
             -2147483648});
             this.s1a2Select.Name = "s1a2Select";
-            this.s1a2Select.Size = new System.Drawing.Size(124, 20);
+            this.s1a2Select.Size = new System.Drawing.Size(151, 20);
             this.s1a2Select.TabIndex = 25;
             this.s1a2Select.Tag = 112;
             this.s1a2Select.ValueChanged += new System.EventHandler(this.FiltParamSelect_ValueChanged);
@@ -1290,7 +1365,7 @@
             // s1b1Hex
             // 
             this.s1b1Hex.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.s1b1Hex.Location = new System.Drawing.Point(164, 29);
+            this.s1b1Hex.Location = new System.Drawing.Point(191, 29);
             this.s1b1Hex.Name = "s1b1Hex";
             this.s1b1Hex.ReadOnly = true;
             this.s1b1Hex.Size = new System.Drawing.Size(64, 20);
@@ -1300,7 +1375,7 @@
             // s1a1Hex
             // 
             this.s1a1Hex.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.s1a1Hex.Location = new System.Drawing.Point(164, 81);
+            this.s1a1Hex.Location = new System.Drawing.Point(191, 81);
             this.s1a1Hex.Name = "s1a1Hex";
             this.s1a1Hex.ReadOnly = true;
             this.s1a1Hex.Size = new System.Drawing.Size(64, 20);
@@ -1330,7 +1405,7 @@
             0,
             -2147483648});
             this.s1b2Select.Name = "s1b2Select";
-            this.s1b2Select.Size = new System.Drawing.Size(124, 20);
+            this.s1b2Select.Size = new System.Drawing.Size(151, 20);
             this.s1b2Select.TabIndex = 19;
             this.s1b2Select.Tag = 80;
             this.s1b2Select.ValueChanged += new System.EventHandler(this.FiltParamSelect_ValueChanged);
@@ -1376,7 +1451,7 @@
             0,
             -2147483648});
             this.s1a1Select.Name = "s1a1Select";
-            this.s1a1Select.Size = new System.Drawing.Size(124, 20);
+            this.s1a1Select.Size = new System.Drawing.Size(151, 20);
             this.s1a1Select.TabIndex = 22;
             this.s1a1Select.Tag = 96;
             this.s1a1Select.ValueChanged += new System.EventHandler(this.FiltParamSelect_ValueChanged);
@@ -1384,57 +1459,61 @@
             // s1b2Hex
             // 
             this.s1b2Hex.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.s1b2Hex.Location = new System.Drawing.Point(164, 55);
+            this.s1b2Hex.Location = new System.Drawing.Point(191, 55);
             this.s1b2Hex.Name = "s1b2Hex";
             this.s1b2Hex.ReadOnly = true;
             this.s1b2Hex.Size = new System.Drawing.Size(64, 20);
             this.s1b2Hex.TabIndex = 21;
             this.s1b2Hex.Text = "00000000";
             // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(854, 24);
-            this.menuStrip1.TabIndex = 1;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // fileToolStripMenuItem
-            // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.saveToolStripMenuItem,
-            this.loadToolStripMenuItem});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem.Text = "&File";
-            // 
             // openDialog
             // 
             this.openDialog.FileName = "openFileDialog1";
+            this.openDialog.Filter = "XML files|*.xml";
             // 
-            // saveToolStripMenuItem
+            // saveDialog
             // 
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.saveToolStripMenuItem.Text = "Save";
-            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            this.saveDialog.Filter = "XML files|*.xml";
             // 
-            // loadToolStripMenuItem
+            // label19
             // 
-            this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.loadToolStripMenuItem.Text = "Load";
+            this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(133, 135);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(54, 13);
+            this.label19.TabIndex = 33;
+            this.label19.Text = "Gain (dB):";
+            // 
+            // s2SpkGainSelect
+            // 
+            this.s2SpkGainSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.s2SpkGainSelect.DecimalPlaces = 1;
+            this.s2SpkGainSelect.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.s2SpkGainSelect.Location = new System.Drawing.Point(192, 133);
+            this.s2SpkGainSelect.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.s2SpkGainSelect.Name = "s2SpkGainSelect";
+            this.s2SpkGainSelect.Size = new System.Drawing.Size(64, 20);
+            this.s2SpkGainSelect.TabIndex = 32;
+            this.s2SpkGainSelect.Tag = 1;
+            this.s2SpkGainSelect.ValueChanged += new System.EventHandler(this.SpkGainSelect_ValueChanged);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(854, 625);
+            this.ClientSize = new System.Drawing.Size(954, 661);
             this.Controls.Add(this.mainSplit);
             this.MainMenuStrip = this.menuStrip1;
-            this.MinimumSize = new System.Drawing.Size(870, 39);
+            this.MinimumSize = new System.Drawing.Size(970, 700);
             this.Name = "MainForm";
             this.Text = "Speaker EQ Designer";
             this.Load += new System.EventHandler(this.MainForm_Load);
@@ -1443,6 +1522,8 @@
             this.mainSplit.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.mainSplit)).EndInit();
             this.mainSplit.ResumeLayout(false);
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.mainTableLayoutPanel.ResumeLayout(false);
             this.s2TableLayoutPanel.ResumeLayout(false);
             this.s2Panel1.ResumeLayout(false);
@@ -1470,14 +1551,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.s1FiltSelect)).EndInit();
             this.s1Panel2.ResumeLayout(false);
             this.s1Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.s1SpkGainSelect)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.s1SRSelect)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.s1b0Select)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.s1b1Select)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.s1a2Select)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.s1b2Select)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.s1a1Select)).EndInit();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.s2SpkGainSelect)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1567,6 +1648,10 @@
         private System.Windows.Forms.SaveFileDialog saveDialog;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem loadToolStripMenuItem;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.NumericUpDown s1SpkGainSelect;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.NumericUpDown s2SpkGainSelect;
     }
 }
 

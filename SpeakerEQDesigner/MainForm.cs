@@ -14,29 +14,33 @@ using OxyPlot.Axes;
 
 namespace SpeakerEQDesigner {
     public partial class MainForm : Form {
-        private static readonly XmlSerializer filtSer = new XmlSerializer(typeof(List<BiquadFilter>));
-        private static readonly XmlSerializer resSer = new XmlSerializer(typeof(List<DPoint>));
+        private static readonly XmlSerializer cfgSer = new XmlSerializer(typeof(Config));
 
-        public List<BiquadFilter>[] filters;
-        public List<DPoint>[] spkResponses;
+        public Config cfg;
+        LinePlusLogFunctionSeries s1SPLSeries, s2SPLSeries;
+        DoubleFilteredResponseSeries sumSPLSeries;
         bool blockUpdates = false;
         int[] filterIndex;
         BiquadFilter[] currFilter;
 
         public MainForm() {
             InitializeComponent();
-            filters = new List<BiquadFilter>[] { new List<BiquadFilter>(), new List<BiquadFilter>() };
+            cfg = new Config() {
+                filters1 = new List<BiquadFilter>(),
+                filters2 = new List<BiquadFilter>(),
+                response1 = new List<DPoint>(),
+                response2 = new List<DPoint>()
+            };
             for (int i = 0; i < 7; i++) {
-                filters[0].Add(new BiquadFilter());
-                filters[1].Add(new BiquadFilter());
+                cfg.filters1.Add(new BiquadFilter());
+                cfg.filters2.Add(new BiquadFilter());
             }
             filterIndex = new int[] { 0, 0 };
-            currFilter = new BiquadFilter[] { filters[0][0], filters[1][0] };
-            spkResponses = new List<DPoint>[] { new List<DPoint>(), new List<DPoint>() };
-            spkResponses[0].Add(new DPoint(10, 90));
-            spkResponses[0].Add(new DPoint(30000, 90));
-            spkResponses[1].Add(new DPoint(10, 90));
-            spkResponses[1].Add(new DPoint(30000, 90));
+            currFilter = new BiquadFilter[] { cfg.filters1[0], cfg.filters2[0] };
+            cfg.response1.Add(new DPoint(10, 90));
+            cfg.response1.Add(new DPoint(30000, 90));
+            cfg.response2.Add(new DPoint(10, 90));
+            cfg.response2.Add(new DPoint(30000, 90));
         }
 
         private void OnFilterTypeSelect(int speaker) {
@@ -84,6 +88,7 @@ namespace SpeakerEQDesigner {
                     s1a2Hex.Text = filt.FP_a2.ToString("X8");
                     s1NegBox.Checked = filt.NegateA;
                     s1SRSelect.Value = filt.SampleRate;
+                    s1SpkGainSelect.Value = (decimal)cfg.gain1;
                     s1PlotView.InvalidatePlot(true);
                     break;
                 case 1:
@@ -104,6 +109,7 @@ namespace SpeakerEQDesigner {
                     s2a2Hex.Text = filt.FP_a2.ToString("X8");
                     s2NegBox.Checked = filt.NegateA;
                     s2SRSelect.Value = filt.SampleRate;
+                    s2SpkGainSelect.Value = (decimal)cfg.gain2;
                     s2PlotView.InvalidatePlot(true);
                     break;
             }
@@ -126,13 +132,13 @@ namespace SpeakerEQDesigner {
         private void FiltAdd_Click(object sender, EventArgs e) {
             var but = (Button)sender;
             int spk = (int)but.Tag;
-            filters[spk].Add(new BiquadFilter());
+            cfg.Filters(spk).Add(new BiquadFilter());
             switch (spk) {
                 case 0:
-                    s1FiltSelect.Maximum = filters[spk].Count;
+                    s1FiltSelect.Maximum = cfg.Filters(spk).Count;
                     break;
                 case 1:
-                    s2FiltSelect.Maximum = filters[spk].Count;
+                    s2FiltSelect.Maximum = cfg.Filters(spk).Count;
                     break;
             }
         }
@@ -142,21 +148,21 @@ namespace SpeakerEQDesigner {
             int spk = (int)box.Tag;
             if (blockUpdates) return;
             filterIndex[spk] = (int)box.Value - 1;
-            currFilter[spk] = filters[spk][filterIndex[spk]];
+            currFilter[spk] = cfg.Filters(spk)[filterIndex[spk]];
             OnFilterTypeSelect(spk);
         }
 
         private void FiltRemove_Click(object sender, EventArgs e) {
             var but = (Button)sender;
             int spk = (int)but.Tag;
-            if (filters[spk].Count > 1) filters[spk].RemoveAt(filters[spk].Count - 1);
+            if (cfg.Filters(spk).Count > 1) cfg.Filters(spk).RemoveAt(cfg.Filters(spk).Count - 1);
             switch (spk) {
                 case 0:
-                    s1FiltSelect.Maximum = filters[spk].Count;
+                    s1FiltSelect.Maximum = cfg.Filters(spk).Count;
                     s1PlotView.InvalidatePlot(true);
                     break;
                 case 1:
-                    s2FiltSelect.Maximum = filters[spk].Count;
+                    s2FiltSelect.Maximum = cfg.Filters(spk).Count;
                     s2PlotView.InvalidatePlot(true);
                     break;
             }
@@ -210,11 +216,11 @@ namespace SpeakerEQDesigner {
             s1Model.Axes.Add(s1FAxis);
             s1Model.Axes.Add(s1SPLAxis);
             s1Model.Axes.Add(s1GainAxis);
-            var s1GainSeries = new LogFunctionSeries(x => filters[0].Sum(f => f.Response(x)), 10, 30000, 1.05m) {
+            var s1GainSeries = new LogFunctionSeries(x => cfg.filters1.Sum(f => f.Response(x)) + cfg.gain1, 10, 30000, 1.05d) {
                 YAxisKey = "Gain",
                 Color = OxyColors.Green
             };
-            var s1SPLSeries = new LinePlusLogFunctionSeries(spkResponses[0], x => filters[0].Sum(f => f.Response(x)), 10, 30000, 1.05m) {
+            s1SPLSeries = new LinePlusLogFunctionSeries(cfg.response1, x => cfg.filters1.Sum(f => f.Response(x)) + cfg.gain1, 10, 30000, 1.05d) {
                 YAxisKey = "SPL",
                 Color = OxyColors.Red
             };
@@ -268,11 +274,11 @@ namespace SpeakerEQDesigner {
             s2Model.Axes.Add(s2FAxis);
             s2Model.Axes.Add(s2SPLAxis);
             s2Model.Axes.Add(s2GainAxis);
-            var s2gainSeries = new LogFunctionSeries(x => filters[1].Sum(f => f.Response(x)), 10, 30000, 1.05m) {
+            var s2gainSeries = new LogFunctionSeries(x => cfg.filters2.Sum(f => f.Response(x)) + cfg.gain2, 10, 30000, 1.05d) {
                 YAxisKey = "Gain",
                 Color = OxyColors.Green
             };
-            var s2SPLSeries = new LinePlusLogFunctionSeries(spkResponses[1], x => filters[1].Sum(f => f.Response(x)), 10, 30000, 1.05m) {
+            s2SPLSeries = new LinePlusLogFunctionSeries(cfg.response2, x => cfg.filters2.Sum(f => f.Response(x)) + cfg.gain2, 10, 30000, 1.05d) {
                 YAxisKey = "SPL",
                 Color = OxyColors.Red
             };
@@ -308,7 +314,8 @@ namespace SpeakerEQDesigner {
             };
             sumModel.Axes.Add(sumFAxis);
             sumModel.Axes.Add(sumSPLAxis);
-            var sumSPLSeries = new DoubleFilteredResponseSeries(spkResponses[0], spkResponses[1], x => filters[0].Sum(f => f.Response(x)), x => filters[1].Sum(f => f.Response(x)), 10, 30000, 1.05m) {
+            sumSPLSeries = new DoubleFilteredResponseSeries(cfg.response1, cfg.response2, x => cfg.filters1.Sum(f => f.Response(x)) + cfg.gain1,
+                x => cfg.filters2.Sum(f => f.Response(x)) + cfg.gain2, 10, 30000, 1.05d) {
                 Color = OxyColors.Red
             };
             sumModel.Series.Add(sumSPLSeries);
@@ -371,7 +378,7 @@ namespace SpeakerEQDesigner {
         private void SpkResponse_Click(object sender, EventArgs e) {
             var but = (Button)sender;
             int spk = (int)but.Tag;
-            new SpeakerResponseForm(spkResponses[spk], spk).ShowDialog(this);
+            new SpeakerResponseForm(cfg.Response(spk), spk).ShowDialog(this);
         }
 
         private void QCrit_Click(object sender, EventArgs e) {
@@ -385,11 +392,54 @@ namespace SpeakerEQDesigner {
             if (saveDialog.ShowDialog() != DialogResult.OK) return;
             var path = saveDialog.FileName;
             var stream = File.OpenWrite(path);
-            resSer.Serialize(stream, spkResponses[0]);
-            resSer.Serialize(stream, spkResponses[1]);
-            filtSer.Serialize(stream, filters[0]);
-            filtSer.Serialize(stream, filters[1]);
+            cfgSer.Serialize(stream, cfg);
             stream.Close();
+        }
+
+        private void SpkGainSelect_ValueChanged(object sender, EventArgs e) {
+            var box = (NumericUpDown)sender;
+            int spk = (int)box.Tag;
+            if (blockUpdates) return;
+            switch (spk) {
+                case 0:
+                    cfg.gain1 = (double)box.Value;
+                    break;
+                case 1:
+                    cfg.gain2 = (double)box.Value;
+                    break;
+            }
+            OnFilterParamChange(spk);
+        }
+
+        private void loadToolStripMenuItem_Click(object sender, EventArgs e) {
+            if (openDialog.ShowDialog() != DialogResult.OK) return;
+            var path = openDialog.FileName;
+            var stream = File.OpenRead(path);
+            cfg = (Config)cfgSer.Deserialize(stream);
+            stream.Close();
+            s1FiltSelect.Value = s2FiltSelect.Value = 1;
+            filterIndex = new int[] { 0, 0 };
+            currFilter = new BiquadFilter[] { cfg.filters1[0], cfg.filters2[0] };
+            s1FiltSelect.Maximum = cfg.filters1.Count;
+            s2FiltSelect.Maximum = cfg.filters2.Count;
+            OnFilterTypeSelect(0);
+            OnFilterTypeSelect(1);
+            sumSPLSeries.LineSeries1 = s1SPLSeries.LineSeries = cfg.response1;
+            sumSPLSeries.LineSeries2 = s2SPLSeries.LineSeries = cfg.response2;
+        }
+    }
+
+    public struct Config {
+        public List<DPoint> response1, response2;
+        public List<BiquadFilter> filters1, filters2;
+        public double gain1, gain2;
+
+        public List<DPoint> Response(int speaker) {
+            return speaker == 0 ? response1 : response2;
+        }
+
+        public List<BiquadFilter> Filters(int speaker) {
+            return speaker == 0 ? filters1 : filters2;
         }
     }
 }

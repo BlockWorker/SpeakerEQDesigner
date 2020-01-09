@@ -68,7 +68,7 @@ namespace SpeakerEQDesigner {
                 ItemsSource = response,
                 Color = OxyColors.Red,
                 LineStyle = LineStyle.Solid,
-                Mapping = (p) => new DataPoint((double)((DPoint)p).X, (double)((DPoint)p).Y)
+                Mapping = (p) => new DataPoint(((DPoint)p).X, ((DPoint)p).Y)
             };
             model.Series.Add(series);
             plotView.Model = model;
@@ -77,21 +77,21 @@ namespace SpeakerEQDesigner {
         private void pointSelect_ValueChanged(object sender = null, EventArgs e = null) {
             currPoint = ((int)pointSelect.Value) - 1;
             deleteButton.Enabled = freqSelect.Enabled = currPoint != 0 && currPoint != response.Count - 1;
-            if (currPoint > 0) freqSelect.Minimum = response[currPoint - 1].X;
+            if (currPoint > 0) freqSelect.Minimum = (decimal)response[currPoint - 1].X;
             else freqSelect.Minimum = 10;
-            if (currPoint < response.Count - 1) freqSelect.Maximum = response[currPoint + 1].X;
+            if (currPoint < response.Count - 1) freqSelect.Maximum = (decimal)response[currPoint + 1].X;
             else freqSelect.Maximum = 30000;
-            freqSelect.Value = response[currPoint].X;
-            splSelect.Value = response[currPoint].Y;
+            freqSelect.Value = (decimal)response[currPoint].X;
+            splSelect.Value = (decimal)response[currPoint].Y;
         }
 
         private void freqSelect_ValueChanged(object sender, EventArgs e) {
-            response[currPoint].X = freqSelect.Value;
+            response[currPoint].X = (double)freqSelect.Value;
             plotView.InvalidatePlot(true);
         }
 
         private void splSelect_ValueChanged(object sender, EventArgs e) {
-            response[currPoint].Y = splSelect.Value;
+            response[currPoint].Y = (double)splSelect.Value;
             plotView.InvalidatePlot(true);
         }
 
@@ -123,7 +123,7 @@ namespace SpeakerEQDesigner {
     public class DPoint {
         public DPoint() : this(0, 0) { }
 
-        public DPoint(decimal x, decimal y) {
+        public DPoint(double x, double y) {
             X = x;
             Y = y;
         }
@@ -133,7 +133,7 @@ namespace SpeakerEQDesigner {
             Y = other.Y;
         }
 
-        public decimal X { get; set; }
-        public decimal Y { get; set; }
+        public double X { get; set; }
+        public double Y { get; set; }
     }
 }
