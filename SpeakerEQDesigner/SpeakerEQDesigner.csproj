@@ -56,6 +56,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BiquadFilter.cs" />
+    <Compile Include="CoefficientExport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CoefficientExport.Designer.cs">
+      <DependentUpon>CoefficientExport.cs</DependentUpon>
+    </Compile>
     <Compile Include="DoubleFilteredResponseSeries.cs" />
     <Compile Include="LogFunctionSeries.cs" />
     <Compile Include="MainForm.cs">
@@ -73,6 +79,9 @@
       <DependentUpon>SpeakerResponseForm.cs</DependentUpon>
     </Compile>
     <Compile Include="LinePlusLogFunctionSeries.cs" />
+    <EmbeddedResource Include="CoefficientExport.resx">
+      <DependentUpon>CoefficientExport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>

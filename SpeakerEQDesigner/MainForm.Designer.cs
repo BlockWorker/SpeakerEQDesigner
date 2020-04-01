@@ -48,6 +48,8 @@
             this.s2FiltSelect = new System.Windows.Forms.NumericUpDown();
             this.label14 = new System.Windows.Forms.Label();
             this.s2Panel2 = new System.Windows.Forms.Panel();
+            this.label19 = new System.Windows.Forms.Label();
+            this.s2SpkGainSelect = new System.Windows.Forms.NumericUpDown();
             this.label15 = new System.Windows.Forms.Label();
             this.s2b0Hex = new System.Windows.Forms.TextBox();
             this.s2SRSelect = new System.Windows.Forms.NumericUpDown();
@@ -108,8 +110,7 @@
             this.s1b2Hex = new System.Windows.Forms.TextBox();
             this.openDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveDialog = new System.Windows.Forms.SaveFileDialog();
-            this.label19 = new System.Windows.Forms.Label();
-            this.s2SpkGainSelect = new System.Windows.Forms.NumericUpDown();
+            this.exportCoefficientsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.mainSplit)).BeginInit();
             this.mainSplit.Panel1.SuspendLayout();
             this.mainSplit.Panel2.SuspendLayout();
@@ -124,6 +125,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.s2FreqSelect)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.s2FiltSelect)).BeginInit();
             this.s2Panel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.s2SpkGainSelect)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.s2SRSelect)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.s2b0Select)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.s2b1Select)).BeginInit();
@@ -145,7 +147,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.s1a2Select)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.s1b2Select)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.s1a1Select)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.s2SpkGainSelect)).BeginInit();
             this.SuspendLayout();
             // 
             // sumPlotView
@@ -184,7 +185,8 @@
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.exportCoefficientsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(954, 24);
@@ -203,14 +205,14 @@
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.loadToolStripMenuItem.Text = "Load";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
@@ -530,6 +532,37 @@
             this.s2Panel2.Name = "s2Panel2";
             this.s2Panel2.Size = new System.Drawing.Size(259, 189);
             this.s2Panel2.TabIndex = 2;
+            // 
+            // label19
+            // 
+            this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(133, 135);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(54, 13);
+            this.label19.TabIndex = 33;
+            this.label19.Text = "Gain (dB):";
+            // 
+            // s2SpkGainSelect
+            // 
+            this.s2SpkGainSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.s2SpkGainSelect.DecimalPlaces = 1;
+            this.s2SpkGainSelect.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
+            this.s2SpkGainSelect.Location = new System.Drawing.Point(192, 133);
+            this.s2SpkGainSelect.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            -2147483648});
+            this.s2SpkGainSelect.Name = "s2SpkGainSelect";
+            this.s2SpkGainSelect.Size = new System.Drawing.Size(64, 20);
+            this.s2SpkGainSelect.TabIndex = 32;
+            this.s2SpkGainSelect.Tag = 1;
+            this.s2SpkGainSelect.ValueChanged += new System.EventHandler(this.SpkGainSelect_ValueChanged);
             // 
             // label15
             // 
@@ -1475,36 +1508,12 @@
             // 
             this.saveDialog.Filter = "XML files|*.xml";
             // 
-            // label19
+            // exportCoefficientsToolStripMenuItem
             // 
-            this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(133, 135);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(54, 13);
-            this.label19.TabIndex = 33;
-            this.label19.Text = "Gain (dB):";
-            // 
-            // s2SpkGainSelect
-            // 
-            this.s2SpkGainSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.s2SpkGainSelect.DecimalPlaces = 1;
-            this.s2SpkGainSelect.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            65536});
-            this.s2SpkGainSelect.Location = new System.Drawing.Point(192, 133);
-            this.s2SpkGainSelect.Minimum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            -2147483648});
-            this.s2SpkGainSelect.Name = "s2SpkGainSelect";
-            this.s2SpkGainSelect.Size = new System.Drawing.Size(64, 20);
-            this.s2SpkGainSelect.TabIndex = 32;
-            this.s2SpkGainSelect.Tag = 1;
-            this.s2SpkGainSelect.ValueChanged += new System.EventHandler(this.SpkGainSelect_ValueChanged);
+            this.exportCoefficientsToolStripMenuItem.Name = "exportCoefficientsToolStripMenuItem";
+            this.exportCoefficientsToolStripMenuItem.Size = new System.Drawing.Size(117, 20);
+            this.exportCoefficientsToolStripMenuItem.Text = "Export coefficients";
+            this.exportCoefficientsToolStripMenuItem.Click += new System.EventHandler(this.exportCoefficientsToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -1535,6 +1544,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.s2FiltSelect)).EndInit();
             this.s2Panel2.ResumeLayout(false);
             this.s2Panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.s2SpkGainSelect)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.s2SRSelect)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.s2b0Select)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.s2b1Select)).EndInit();
@@ -1558,7 +1568,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.s1a2Select)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.s1b2Select)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.s1a1Select)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.s2SpkGainSelect)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1652,6 +1661,7 @@
         private System.Windows.Forms.NumericUpDown s1SpkGainSelect;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.NumericUpDown s2SpkGainSelect;
+        private System.Windows.Forms.ToolStripMenuItem exportCoefficientsToolStripMenuItem;
     }
 }
 

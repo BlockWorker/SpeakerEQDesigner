@@ -411,12 +411,18 @@ namespace SpeakerEQDesigner {
             OnFilterParamChange(spk);
         }
 
+        private void exportCoefficientsToolStripMenuItem_Click(object sender, EventArgs e) {
+            new CoefficientExport(cfg).ShowDialog();
+        }
+
         private void loadToolStripMenuItem_Click(object sender, EventArgs e) {
             if (openDialog.ShowDialog() != DialogResult.OK) return;
             var path = openDialog.FileName;
             var stream = File.OpenRead(path);
             cfg = (Config)cfgSer.Deserialize(stream);
             stream.Close();
+            foreach (var f in cfg.filters1) f.UpdateFilter();
+            foreach (var f in cfg.filters2) f.UpdateFilter();
             s1FiltSelect.Value = s2FiltSelect.Value = 1;
             filterIndex = new int[] { 0, 0 };
             currFilter = new BiquadFilter[] { cfg.filters1[0], cfg.filters2[0] };

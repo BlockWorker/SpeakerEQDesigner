@@ -15,11 +15,11 @@ namespace SpeakerEQDesigner {
         public decimal b2 = 0;
         public decimal a1 = 0;
         public decimal a2 = 0;
-        [XmlIgnore] public uint FP_b0 { get; private set; } = 0x00800000;
-        [XmlIgnore] public uint FP_b1 { get; private set; } = 0;
-        [XmlIgnore] public uint FP_b2 { get; private set; } = 0;
-        [XmlIgnore] public uint FP_a1 { get; private set; } = 0;
-        [XmlIgnore] public uint FP_a2 { get; private set; } = 0;
+        [XmlIgnore] public int FP_b0 { get; private set; } = 0x00800000;
+        [XmlIgnore] public int FP_b1 { get; private set; } = 0;
+        [XmlIgnore] public int FP_b2 { get; private set; } = 0;
+        [XmlIgnore] public int FP_a1 { get; private set; } = 0;
+        [XmlIgnore] public int FP_a2 { get; private set; } = 0;
         public FilterType Type { get; set; } = FilterType.Disabled;
         public decimal Frequency { get; set; } = 1000m;
         public decimal Q { get; set; } = 1m;
@@ -27,16 +27,12 @@ namespace SpeakerEQDesigner {
         public decimal SampleRate { get; set; } = 96000;
         public bool NegateA { get; set; } = true;
 
-        public static uint ToFP(decimal value) {
-            var raw = (int)Math.Round(value * FPMult, MidpointRounding.AwayFromZero);
-            if (raw < 0) return (uint)(-raw | 0x08000000);
-            else return (uint)raw;
+        public static int ToFP(decimal value) {
+            return (int)Math.Round(value * FPMult, MidpointRounding.AwayFromZero);
         }
 
-        public static decimal FromFP(uint value) {
-            int raw = (int)value;
-            if ((raw & 0x08000000) > 0) raw = -(raw ^ 0x08000000);
-            return raw / FPMult;
+        public static decimal FromFP(int value) {
+            return value / FPMult;
         }
 
         public void UpdateFilter() {
