@@ -29,10 +29,10 @@
             this.channel2Box = new System.Windows.Forms.TextBox();
             this.lineLengthSelect = new System.Windows.Forms.NumericUpDown();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.okButton = new System.Windows.Forms.Button();
-            this.gain1Box = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
             this.gain2Box = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.gain1Box = new System.Windows.Forms.TextBox();
+            this.okButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.lineLengthSelect)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -131,26 +131,15 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(858, 449);
             this.tableLayoutPanel1.TabIndex = 6;
             // 
-            // okButton
+            // gain2Box
             // 
-            this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.okButton.Location = new System.Drawing.Point(771, 464);
-            this.okButton.Name = "okButton";
-            this.okButton.Size = new System.Drawing.Size(99, 23);
-            this.okButton.TabIndex = 7;
-            this.okButton.Text = "OK";
-            this.okButton.UseVisualStyleBackColor = true;
-            // 
-            // gain1Box
-            // 
-            this.gain1Box.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gain1Box.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gain1Box.Location = new System.Drawing.Point(432, 3);
-            this.gain1Box.Name = "gain1Box";
-            this.gain1Box.ReadOnly = true;
-            this.gain1Box.Size = new System.Drawing.Size(423, 23);
-            this.gain1Box.TabIndex = 6;
+            this.gain2Box.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gain2Box.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gain2Box.Location = new System.Drawing.Point(432, 227);
+            this.gain2Box.Name = "gain2Box";
+            this.gain2Box.ReadOnly = true;
+            this.gain2Box.Size = new System.Drawing.Size(423, 23);
+            this.gain2Box.TabIndex = 9;
             // 
             // label1
             // 
@@ -162,15 +151,26 @@
             this.label1.TabIndex = 8;
             this.label1.Text = "Channel1:";
             // 
-            // gain2Box
+            // gain1Box
             // 
-            this.gain2Box.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gain2Box.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gain2Box.Location = new System.Drawing.Point(432, 227);
-            this.gain2Box.Name = "gain2Box";
-            this.gain2Box.ReadOnly = true;
-            this.gain2Box.Size = new System.Drawing.Size(423, 23);
-            this.gain2Box.TabIndex = 9;
+            this.gain1Box.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gain1Box.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gain1Box.Location = new System.Drawing.Point(432, 3);
+            this.gain1Box.Name = "gain1Box";
+            this.gain1Box.ReadOnly = true;
+            this.gain1Box.Size = new System.Drawing.Size(423, 23);
+            this.gain1Box.TabIndex = 6;
+            // 
+            // okButton
+            // 
+            this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
+            this.okButton.Location = new System.Drawing.Point(771, 464);
+            this.okButton.Name = "okButton";
+            this.okButton.Size = new System.Drawing.Size(99, 23);
+            this.okButton.TabIndex = 7;
+            this.okButton.Text = "OK";
+            this.okButton.UseVisualStyleBackColor = true;
             // 
             // CoefficientExport
             // 
