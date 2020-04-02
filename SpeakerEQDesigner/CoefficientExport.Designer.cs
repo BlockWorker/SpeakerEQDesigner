@@ -66,7 +66,7 @@
             this.channel1Box.Multiline = true;
             this.channel1Box.Name = "channel1Box";
             this.channel1Box.ReadOnly = true;
-            this.channel1Box.Size = new System.Drawing.Size(852, 188);
+            this.channel1Box.Size = new System.Drawing.Size(927, 188);
             this.channel1Box.TabIndex = 3;
             this.channel1Box.WordWrap = false;
             // 
@@ -79,7 +79,7 @@
             this.channel2Box.Multiline = true;
             this.channel2Box.Name = "channel2Box";
             this.channel2Box.ReadOnly = true;
-            this.channel2Box.Size = new System.Drawing.Size(852, 189);
+            this.channel2Box.Size = new System.Drawing.Size(927, 189);
             this.channel2Box.TabIndex = 4;
             this.channel2Box.WordWrap = false;
             // 
@@ -101,7 +101,7 @@
             this.lineLengthSelect.Size = new System.Drawing.Size(69, 20);
             this.lineLengthSelect.TabIndex = 5;
             this.lineLengthSelect.Value = new decimal(new int[] {
-            70,
+            130,
             0,
             0,
             0});
@@ -128,17 +128,17 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(858, 449);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(933, 449);
             this.tableLayoutPanel1.TabIndex = 6;
             // 
             // gain2Box
             // 
             this.gain2Box.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gain2Box.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gain2Box.Location = new System.Drawing.Point(432, 227);
+            this.gain2Box.Location = new System.Drawing.Point(469, 227);
             this.gain2Box.Name = "gain2Box";
             this.gain2Box.ReadOnly = true;
-            this.gain2Box.Size = new System.Drawing.Size(423, 23);
+            this.gain2Box.Size = new System.Drawing.Size(461, 23);
             this.gain2Box.TabIndex = 9;
             // 
             // label1
@@ -155,17 +155,17 @@
             // 
             this.gain1Box.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gain1Box.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gain1Box.Location = new System.Drawing.Point(432, 3);
+            this.gain1Box.Location = new System.Drawing.Point(469, 3);
             this.gain1Box.Name = "gain1Box";
             this.gain1Box.ReadOnly = true;
-            this.gain1Box.Size = new System.Drawing.Size(423, 23);
+            this.gain1Box.Size = new System.Drawing.Size(461, 23);
             this.gain1Box.TabIndex = 6;
             // 
             // okButton
             // 
             this.okButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.okButton.Location = new System.Drawing.Point(771, 464);
+            this.okButton.Location = new System.Drawing.Point(846, 464);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(99, 23);
             this.okButton.TabIndex = 7;
@@ -178,7 +178,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.okButton;
-            this.ClientSize = new System.Drawing.Size(882, 499);
+            this.ClientSize = new System.Drawing.Size(957, 499);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.lineLengthSelect);

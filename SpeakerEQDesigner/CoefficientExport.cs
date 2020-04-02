@@ -18,44 +18,48 @@ namespace SpeakerEQDesigner {
         }
 
         private void CheckSplitLine(int maxLineLength, ref int currLineLength, ref string output) {
-            if (currLineLength + 12 > maxLineLength) {
+            if (currLineLength + 24 > maxLineLength) {
                 output = output.Substring(0, output.Length - 1) + "\r\n  ";
                 currLineLength = 2;
             }
-            currLineLength += 12;
+            currLineLength += 24;
+        }
+
+        private object[] GetIntBytes(int value) {
+            return new object[] { (byte)(value >> 24), (byte)((value >> 16) & 0xff), (byte)((value >> 8) & 0xff), (byte)(value & 0xff) };
         }
 
         private void WriteCoefficients() {
-            const string format = "0x{0:X8}, ";
+            const string format = "0x{0:X2}, 0x{1:X2}, 0x{2:X2}, 0x{3:X2}, ";
             int maxLineLength = (int)lineLengthSelect.Value;
             int currLineLength = 2;
             var output = "{ ";
             foreach (var f in config.filters1) {
                 CheckSplitLine(maxLineLength, ref currLineLength, ref output);
-                output += string.Format(format, f.FP_b0);
+                output += string.Format(format, GetIntBytes(f.FP_b0));
                 CheckSplitLine(maxLineLength, ref currLineLength, ref output);
-                output += string.Format(format, f.FP_b1);
+                output += string.Format(format, GetIntBytes(f.FP_b1));
                 CheckSplitLine(maxLineLength, ref currLineLength, ref output);
-                output += string.Format(format, f.FP_b2);
+                output += string.Format(format, GetIntBytes(f.FP_b2));
                 CheckSplitLine(maxLineLength, ref currLineLength, ref output);
-                output += string.Format(format, f.FP_a1);
+                output += string.Format(format, GetIntBytes(f.FP_a1));
                 CheckSplitLine(maxLineLength, ref currLineLength, ref output);
-                output += string.Format(format, f.FP_a2);
+                output += string.Format(format, GetIntBytes(f.FP_a2));
             }
             channel1Box.Text = output.Substring(0, output.Length - 2) + " }";
             currLineLength = 2;
             output = "{ ";
             foreach (var f in config.filters2) {
                 CheckSplitLine(maxLineLength, ref currLineLength, ref output);
-                output += string.Format(format, f.FP_b0);
+                output += string.Format(format, GetIntBytes(f.FP_b0));
                 CheckSplitLine(maxLineLength, ref currLineLength, ref output);
-                output += string.Format(format, f.FP_b1);
+                output += string.Format(format, GetIntBytes(f.FP_b1));
                 CheckSplitLine(maxLineLength, ref currLineLength, ref output);
-                output += string.Format(format, f.FP_b2);
+                output += string.Format(format, GetIntBytes(f.FP_b2));
                 CheckSplitLine(maxLineLength, ref currLineLength, ref output);
-                output += string.Format(format, f.FP_a1);
+                output += string.Format(format, GetIntBytes(f.FP_a1));
                 CheckSplitLine(maxLineLength, ref currLineLength, ref output);
-                output += string.Format(format, f.FP_a2);
+                output += string.Format(format, GetIntBytes(f.FP_a2));
             }
             channel2Box.Text = output.Substring(0, output.Length - 2) + " }";
             gain1Box.Text = string.Format("0x{0:X8}", BiquadFilter.ToFP((decimal)config.gain1));
