@@ -29,6 +29,7 @@
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportCoefficientsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.s2TableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.s2Panel1 = new System.Windows.Forms.Panel();
@@ -110,7 +111,16 @@
             this.s1b2Hex = new System.Windows.Forms.TextBox();
             this.openDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveDialog = new System.Windows.Forms.SaveFileDialog();
-            this.exportCoefficientsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.flatnessStartSel = new System.Windows.Forms.NumericUpDown();
+            this.flatnessEndSel = new System.Windows.Forms.NumericUpDown();
+            this.label23 = new System.Windows.Forms.Label();
+            this.flatnessMeanBox = new System.Windows.Forms.TextBox();
+            this.flatnessPeakBox = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.flatnessStdDevBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.mainSplit)).BeginInit();
             this.mainSplit.Panel1.SuspendLayout();
             this.mainSplit.Panel2.SuspendLayout();
@@ -147,16 +157,20 @@
             ((System.ComponentModel.ISupportInitialize)(this.s1a2Select)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.s1b2Select)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.s1a1Select)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.flatnessStartSel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.flatnessEndSel)).BeginInit();
             this.SuspendLayout();
             // 
             // sumPlotView
             // 
+            this.sumPlotView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.sumPlotView.BackColor = System.Drawing.Color.White;
-            this.sumPlotView.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.sumPlotView.Location = new System.Drawing.Point(0, 24);
+            this.sumPlotView.Location = new System.Drawing.Point(0, 54);
             this.sumPlotView.Name = "sumPlotView";
             this.sumPlotView.PanCursor = System.Windows.Forms.Cursors.Hand;
-            this.sumPlotView.Size = new System.Drawing.Size(954, 274);
+            this.sumPlotView.Size = new System.Drawing.Size(954, 244);
             this.sumPlotView.TabIndex = 0;
             this.sumPlotView.Text = "plotView1";
             this.sumPlotView.ZoomHorizontalCursor = System.Windows.Forms.Cursors.SizeWE;
@@ -172,6 +186,16 @@
             // 
             // mainSplit.Panel1
             // 
+            this.mainSplit.Panel1.Controls.Add(this.flatnessStdDevBox);
+            this.mainSplit.Panel1.Controls.Add(this.label25);
+            this.mainSplit.Panel1.Controls.Add(this.label24);
+            this.mainSplit.Panel1.Controls.Add(this.flatnessPeakBox);
+            this.mainSplit.Panel1.Controls.Add(this.flatnessMeanBox);
+            this.mainSplit.Panel1.Controls.Add(this.label23);
+            this.mainSplit.Panel1.Controls.Add(this.flatnessEndSel);
+            this.mainSplit.Panel1.Controls.Add(this.flatnessStartSel);
+            this.mainSplit.Panel1.Controls.Add(this.label22);
+            this.mainSplit.Panel1.Controls.Add(this.label21);
             this.mainSplit.Panel1.Controls.Add(this.sumPlotView);
             this.mainSplit.Panel1.Controls.Add(this.menuStrip1);
             // 
@@ -215,6 +239,13 @@
             this.loadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.loadToolStripMenuItem.Text = "Load";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
+            // 
+            // exportCoefficientsToolStripMenuItem
+            // 
+            this.exportCoefficientsToolStripMenuItem.Name = "exportCoefficientsToolStripMenuItem";
+            this.exportCoefficientsToolStripMenuItem.Size = new System.Drawing.Size(117, 20);
+            this.exportCoefficientsToolStripMenuItem.Text = "Export coefficients";
+            this.exportCoefficientsToolStripMenuItem.Click += new System.EventHandler(this.exportCoefficientsToolStripMenuItem_Click);
             // 
             // mainTableLayoutPanel
             // 
@@ -1508,12 +1539,129 @@
             // 
             this.saveDialog.Filter = "XML files|*.xml";
             // 
-            // exportCoefficientsToolStripMenuItem
+            // label21
             // 
-            this.exportCoefficientsToolStripMenuItem.Name = "exportCoefficientsToolStripMenuItem";
-            this.exportCoefficientsToolStripMenuItem.Size = new System.Drawing.Size(117, 20);
-            this.exportCoefficientsToolStripMenuItem.Text = "Export coefficients";
-            this.exportCoefficientsToolStripMenuItem.Click += new System.EventHandler(this.exportCoefficientsToolStripMenuItem_Click);
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(12, 29);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(94, 13);
+            this.label21.TabIndex = 2;
+            this.label21.Text = "Flatness start (Hz):";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(186, 30);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(51, 13);
+            this.label22.TabIndex = 3;
+            this.label22.Text = "End (Hz):";
+            // 
+            // flatnessStartSel
+            // 
+            this.flatnessStartSel.Location = new System.Drawing.Point(112, 27);
+            this.flatnessStartSel.Maximum = new decimal(new int[] {
+            29999,
+            0,
+            0,
+            0});
+            this.flatnessStartSel.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.flatnessStartSel.Name = "flatnessStartSel";
+            this.flatnessStartSel.Size = new System.Drawing.Size(68, 20);
+            this.flatnessStartSel.TabIndex = 4;
+            this.flatnessStartSel.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.flatnessStartSel.ValueChanged += new System.EventHandler(this.flatnessSel_ValueChanged);
+            // 
+            // flatnessEndSel
+            // 
+            this.flatnessEndSel.Location = new System.Drawing.Point(243, 27);
+            this.flatnessEndSel.Maximum = new decimal(new int[] {
+            30000,
+            0,
+            0,
+            0});
+            this.flatnessEndSel.Minimum = new decimal(new int[] {
+            11,
+            0,
+            0,
+            0});
+            this.flatnessEndSel.Name = "flatnessEndSel";
+            this.flatnessEndSel.Size = new System.Drawing.Size(69, 20);
+            this.flatnessEndSel.TabIndex = 5;
+            this.flatnessEndSel.Value = new decimal(new int[] {
+            30000,
+            0,
+            0,
+            0});
+            this.flatnessEndSel.ValueChanged += new System.EventHandler(this.flatnessSel_ValueChanged);
+            // 
+            // label23
+            // 
+            this.label23.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(539, 30);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(37, 13);
+            this.label23.TabIndex = 6;
+            this.label23.Text = "Mean:";
+            // 
+            // flatnessMeanBox
+            // 
+            this.flatnessMeanBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.flatnessMeanBox.Location = new System.Drawing.Point(582, 27);
+            this.flatnessMeanBox.Name = "flatnessMeanBox";
+            this.flatnessMeanBox.ReadOnly = true;
+            this.flatnessMeanBox.Size = new System.Drawing.Size(79, 20);
+            this.flatnessMeanBox.TabIndex = 7;
+            this.flatnessMeanBox.Text = "90,00 dB";
+            // 
+            // flatnessPeakBox
+            // 
+            this.flatnessPeakBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.flatnessPeakBox.Location = new System.Drawing.Point(735, 27);
+            this.flatnessPeakBox.Name = "flatnessPeakBox";
+            this.flatnessPeakBox.ReadOnly = true;
+            this.flatnessPeakBox.Size = new System.Drawing.Size(79, 20);
+            this.flatnessPeakBox.TabIndex = 8;
+            this.flatnessPeakBox.Text = "0,00 dB";
+            // 
+            // label24
+            // 
+            this.label24.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(667, 30);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(62, 13);
+            this.label24.TabIndex = 9;
+            this.label24.Text = "Peak-peak:";
+            // 
+            // label25
+            // 
+            this.label25.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(820, 30);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(46, 13);
+            this.label25.TabIndex = 10;
+            this.label25.Text = "StdDev:";
+            // 
+            // flatnessStdDevBox
+            // 
+            this.flatnessStdDevBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.flatnessStdDevBox.Location = new System.Drawing.Point(872, 27);
+            this.flatnessStdDevBox.Name = "flatnessStdDevBox";
+            this.flatnessStdDevBox.ReadOnly = true;
+            this.flatnessStdDevBox.Size = new System.Drawing.Size(79, 20);
+            this.flatnessStdDevBox.TabIndex = 11;
+            this.flatnessStdDevBox.Text = "0,000 dB";
             // 
             // MainForm
             // 
@@ -1568,6 +1716,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.s1a2Select)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.s1b2Select)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.s1a1Select)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.flatnessStartSel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.flatnessEndSel)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1662,6 +1812,16 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.NumericUpDown s2SpkGainSelect;
         private System.Windows.Forms.ToolStripMenuItem exportCoefficientsToolStripMenuItem;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.TextBox flatnessPeakBox;
+        private System.Windows.Forms.TextBox flatnessMeanBox;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.NumericUpDown flatnessEndSel;
+        private System.Windows.Forms.NumericUpDown flatnessStartSel;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.TextBox flatnessStdDevBox;
+        private System.Windows.Forms.Label label25;
     }
 }
 

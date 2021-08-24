@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using OxyPlot;
 using OxyPlot.Axes;
 using OxyPlot.Series;
-using DecimalMath;
 
 namespace SpeakerEQDesigner {
     class DoubleFilteredResponseSeries : LineSeries {
@@ -51,6 +50,10 @@ namespace SpeakerEQDesigner {
             get { return step; }
             set { UpdateFunc(lineSeries1, lineSeries2, func1, func2, lowLim, upLim, value); }
         }
+
+
+
+        public event EventHandler OnUpdate;
 
         public DoubleFilteredResponseSeries(List<DPoint> linePts1, List<DPoint> linePts2, Func<double, double> f1, Func<double, double> f2, double lowerLim, double upperLim, double logStep) {
             UpdateFunc(linePts1, linePts2, f1, f2, lowerLim, upperLim, logStep);
@@ -115,6 +118,8 @@ namespace SpeakerEQDesigner {
 
                 Points.Add(new DataPoint(x, total));
             }
+
+            OnUpdate?.Invoke(this, EventArgs.Empty);
         }
 
         protected override void UpdateData() {

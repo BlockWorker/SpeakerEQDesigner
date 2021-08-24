@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using System.Xml.Serialization;
 using OxyPlot;
 using OxyPlot.Axes;
+using OxyPlot.Series;
 
 namespace SpeakerEQDesigner {
     public partial class MainForm : Form {
@@ -19,6 +20,7 @@ namespace SpeakerEQDesigner {
         public Config cfg;
         LinePlusLogFunctionSeries s1SPLSeries, s2SPLSeries;
         DoubleFilteredResponseSeries sumSPLSeries;
+        LineSeries avgSPLSeries;
         bool blockUpdates = false;
         int[] filterIndex;
         BiquadFilter[] currFilter;
@@ -318,8 +320,41 @@ namespace SpeakerEQDesigner {
                 x => cfg.filters2.Sum(f => f.Response(x)) + cfg.gain2, 10, 30000, 1.05d) {
                 Color = OxyColors.Red
             };
+            sumSPLSeries.OnUpdate += UpdateFlatness;
             sumModel.Series.Add(sumSPLSeries);
+            avgSPLSeries = new LineSeries() {
+                Color = OxyColors.Orange,
+                LineStyle = LineStyle.Dash,
+                StrokeThickness = 1d
+            };
+            avgSPLSeries.Points.Add(new DataPoint(10d, 90d));
+            avgSPLSeries.Points.Add(new DataPoint(30000d, 90d));
+            sumModel.Series.Add(avgSPLSeries);
             sumPlotView.Model = sumModel;
+        }
+
+        private void UpdateFlatness(object sender, EventArgs e) {
+            var values = new List<double>();
+            foreach (var point in sumSPLSeries.Points) {
+                if (point.X >= (double)flatnessStartSel.Value && point.X <= (double)flatnessEndSel.Value) values.Add(point.Y);
+            }
+
+            if (values.Count == 0) {
+                avgSPLSeries.IsVisible = false;
+                flatnessMeanBox.Text = flatnessPeakBox.Text = flatnessStdDevBox.Text = "--- dB";
+            } else {
+                var mean = values.Sum() / values.Count;
+                var peak = values.Max() - values.Min();
+                var stddev = Math.Sqrt(values.Sum(x => (x - mean) * (x - mean)) / (values.Count - 1));
+                flatnessMeanBox.Text = string.Format("{0:F2} dB", mean);
+                flatnessPeakBox.Text = string.Format("{0:F2} dB", peak);
+                flatnessStdDevBox.Text = string.Format("{0:F3} dB", stddev);
+                avgSPLSeries.Points[0] = new DataPoint(10d, mean);
+                avgSPLSeries.Points[1] = new DataPoint(30000d, mean);
+                avgSPLSeries.IsVisible = true;
+            }
+
+            sumPlotView.Invalidate(true);
         }
 
         private void TypeSelect_SelectedIndexChanged(object sender, EventArgs e) {
@@ -413,6 +448,15 @@ namespace SpeakerEQDesigner {
 
         private void exportCoefficientsToolStripMenuItem_Click(object sender, EventArgs e) {
             new CoefficientExport(cfg).ShowDialog();
+        }
+
+        private void flatnessSel_ValueChanged(object sender, EventArgs e) {
+            if (flatnessStartSel.Value >= flatnessEndSel.Value) {
+                if (sender == flatnessEndSel) flatnessStartSel.Value = flatnessEndSel.Value - 1;
+                else flatnessEndSel.Value = flatnessStartSel.Value + 1;
+            } else {
+                UpdateFlatness(null, null);
+            }
         }
 
         private void loadToolStripMenuItem_Click(object sender, EventArgs e) {
