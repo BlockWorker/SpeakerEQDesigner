@@ -5,21 +5,28 @@ using System.Text;
 using System.Threading.Tasks;
 using DecimalMath;
 using System.Xml.Serialization;
+using System.Windows.Forms;
 
 namespace SpeakerEQDesigner {
     public class BiquadFilter {
-        private const decimal FPMult = 8388608m; //2^23
+        [XmlIgnore] public Config cfg;
 
         public decimal b0 = 1;
         public decimal b1 = 0;
         public decimal b2 = 0;
         public decimal a1 = 0;
         public decimal a2 = 0;
+        [XmlIgnore] public int FP_shift = 0;
         [XmlIgnore] public int FP_b0 { get; private set; } = 0x00800000;
         [XmlIgnore] public int FP_b1 { get; private set; } = 0;
         [XmlIgnore] public int FP_b2 { get; private set; } = 0;
         [XmlIgnore] public int FP_a1 { get; private set; } = 0;
         [XmlIgnore] public int FP_a2 { get; private set; } = 0;
+        [XmlIgnore] public decimal rounded_b0 { get; private set; } = 1;
+        [XmlIgnore] public decimal rounded_b1 { get; private set; } = 0;
+        [XmlIgnore] public decimal rounded_b2 { get; private set; } = 0;
+        [XmlIgnore] public decimal rounded_a1 { get; private set; } = 0;
+        [XmlIgnore] public decimal rounded_a2 { get; private set; } = 0;
         public FilterType Type { get; set; } = FilterType.Disabled;
         public decimal Frequency { get; set; } = 1000m;
         public decimal Q { get; set; } = 1m;
@@ -27,12 +34,13 @@ namespace SpeakerEQDesigner {
         public decimal SampleRate { get; set; } = 96000;
         public bool NegateA { get; set; } = true;
 
-        public static int ToFP(decimal value) {
-            return (int)Math.Round(value * FPMult, MidpointRounding.AwayFromZero);
+
+        public int ToFP(decimal value) {
+            return (int)Math.Round(value / (1 << FP_shift) * cfg.FPMult, MidpointRounding.AwayFromZero);
         }
 
-        public static decimal FromFP(int value) {
-            return value / FPMult;
+        public decimal FromFP(int value) {
+            return value / cfg.FPMult * (1 << FP_shift);
         }
 
         public void UpdateFilter() {
@@ -50,9 +58,7 @@ namespace SpeakerEQDesigner {
                 case FilterType.Disabled:
                     b0 = 1;
                     b1 = b2 = a1 = a2 = 0;
-                    FP_b0 = 0x00800000;
-                    FP_b1 = FP_b2 = FP_a1 = FP_a2 = 0;
-                    return;
+                    break;
                 case FilterType.EQ:
                     b0 = 1m + alpha * A;
                     b1 = a1 = -2m * cosw;
@@ -116,16 +122,31 @@ namespace SpeakerEQDesigner {
                 a1 *= -1m;
                 a2 *= -1m;
             }
+
+            int shift = 0;
+            decimal maxVal = Math.Max(b0, Math.Max(b1, Math.Max(b2, Math.Max(a1, a2))));
+            if (maxVal > cfg.FPMax) {
+                shift = Math.Max(shift, (int)DecimalEx.Ceiling(DecimalEx.Log2(maxVal / cfg.FPMax)));
+            }
+            decimal minVal = Math.Min(b0, Math.Min(b1, Math.Min(b2, Math.Min(a1, a2))));
+            if (minVal < cfg.FPMin) {
+                shift = Math.Max(shift, (int)DecimalEx.Ceiling(DecimalEx.Log2(minVal / cfg.FPMin)));
+            }
+            RecomputeFPForGivenShift(shift);
+        }
+
+        public void RecomputeFPForGivenShift(int shift) {
+            FP_shift = shift;
             FP_b0 = ToFP(b0);
             FP_b1 = ToFP(b1);
             FP_b2 = ToFP(b2);
             FP_a1 = ToFP(a1);
             FP_a2 = ToFP(a2);
-            b0 = FromFP(FP_b0);
-            b1 = FromFP(FP_b1);
-            b2 = FromFP(FP_b2);
-            a1 = FromFP(FP_a1);
-            a2 = FromFP(FP_a2);
+            rounded_b0 = FromFP(FP_b0);
+            rounded_b1 = FromFP(FP_b1);
+            rounded_b2 = FromFP(FP_b2);
+            rounded_a1 = FromFP(FP_a1);
+            rounded_a2 = FromFP(FP_a2);
         }
 
         public double Response(double f) {

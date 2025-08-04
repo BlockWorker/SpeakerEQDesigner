@@ -33,6 +33,13 @@
             this.label1 = new System.Windows.Forms.Label();
             this.gain1Box = new System.Windows.Forms.TextBox();
             this.okButton = new System.Windows.Forms.Button();
+            this.formatBox = new System.Windows.Forms.ComboBox();
+            this.shift1Box = new System.Windows.Forms.TextBox();
+            this.shift2Box = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.lineLengthSelect)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
@@ -59,26 +66,28 @@
             // 
             // channel1Box
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.channel1Box, 2);
+            this.tableLayoutPanel1.SetColumnSpan(this.channel1Box, 5);
             this.channel1Box.Dock = System.Windows.Forms.DockStyle.Fill;
             this.channel1Box.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.channel1Box.Location = new System.Drawing.Point(3, 33);
             this.channel1Box.Multiline = true;
             this.channel1Box.Name = "channel1Box";
             this.channel1Box.ReadOnly = true;
+            this.channel1Box.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.channel1Box.Size = new System.Drawing.Size(927, 188);
             this.channel1Box.TabIndex = 3;
             this.channel1Box.WordWrap = false;
             // 
             // channel2Box
             // 
-            this.tableLayoutPanel1.SetColumnSpan(this.channel2Box, 2);
+            this.tableLayoutPanel1.SetColumnSpan(this.channel2Box, 5);
             this.channel2Box.Dock = System.Windows.Forms.DockStyle.Fill;
             this.channel2Box.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.channel2Box.Location = new System.Drawing.Point(3, 257);
             this.channel2Box.Multiline = true;
             this.channel2Box.Name = "channel2Box";
             this.channel2Box.ReadOnly = true;
+            this.channel2Box.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.channel2Box.Size = new System.Drawing.Size(927, 189);
             this.channel2Box.TabIndex = 4;
             this.channel2Box.WordWrap = false;
@@ -112,15 +121,24 @@
             this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Controls.Add(this.gain2Box, 1, 2);
+            this.tableLayoutPanel1.ColumnCount = 5;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel1.Controls.Add(this.label7, 3, 2);
+            this.tableLayoutPanel1.Controls.Add(this.label6, 1, 2);
+            this.tableLayoutPanel1.Controls.Add(this.label5, 3, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label4, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.shift2Box, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.shift1Box, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.gain2Box, 4, 2);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.channel1Box, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.channel2Box, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 2);
-            this.tableLayoutPanel1.Controls.Add(this.gain1Box, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.gain1Box, 4, 0);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(12, 12);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
@@ -135,10 +153,10 @@
             // 
             this.gain2Box.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gain2Box.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gain2Box.Location = new System.Drawing.Point(469, 227);
+            this.gain2Box.Location = new System.Drawing.Point(657, 227);
             this.gain2Box.Name = "gain2Box";
             this.gain2Box.ReadOnly = true;
-            this.gain2Box.Size = new System.Drawing.Size(461, 23);
+            this.gain2Box.Size = new System.Drawing.Size(273, 23);
             this.gain2Box.TabIndex = 9;
             // 
             // label1
@@ -155,10 +173,10 @@
             // 
             this.gain1Box.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gain1Box.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gain1Box.Location = new System.Drawing.Point(469, 3);
+            this.gain1Box.Location = new System.Drawing.Point(657, 3);
             this.gain1Box.Name = "gain1Box";
             this.gain1Box.ReadOnly = true;
-            this.gain1Box.Size = new System.Drawing.Size(461, 23);
+            this.gain1Box.Size = new System.Drawing.Size(273, 23);
             this.gain1Box.TabIndex = 6;
             // 
             // okButton
@@ -172,6 +190,79 @@
             this.okButton.Text = "OK";
             this.okButton.UseVisualStyleBackColor = true;
             // 
+            // formatBox
+            // 
+            this.formatBox.FormattingEnabled = true;
+            this.formatBox.Items.AddRange(new object[] {
+            "Words",
+            "Bytes Big Endian",
+            "Bytes Little Endian"});
+            this.formatBox.Location = new System.Drawing.Point(227, 467);
+            this.formatBox.Name = "formatBox";
+            this.formatBox.Size = new System.Drawing.Size(179, 21);
+            this.formatBox.TabIndex = 8;
+            this.formatBox.SelectedIndexChanged += new System.EventHandler(this.formatBox_SelectedIndexChanged);
+            // 
+            // shift1Box
+            // 
+            this.shift1Box.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.shift1Box.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.shift1Box.Location = new System.Drawing.Point(330, 3);
+            this.shift1Box.Name = "shift1Box";
+            this.shift1Box.ReadOnly = true;
+            this.shift1Box.Size = new System.Drawing.Size(271, 23);
+            this.shift1Box.TabIndex = 10;
+            // 
+            // shift2Box
+            // 
+            this.shift2Box.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.shift2Box.Font = new System.Drawing.Font("Consolas", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.shift2Box.Location = new System.Drawing.Point(330, 227);
+            this.shift2Box.Name = "shift2Box";
+            this.shift2Box.ReadOnly = true;
+            this.shift2Box.Size = new System.Drawing.Size(271, 23);
+            this.shift2Box.TabIndex = 11;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(280, 4);
+            this.label4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(31, 13);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Shift:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(607, 4);
+            this.label5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(32, 13);
+            this.label5.TabIndex = 13;
+            this.label5.Text = "Gain:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(280, 228);
+            this.label6.Margin = new System.Windows.Forms.Padding(3, 4, 3, 0);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(31, 13);
+            this.label6.TabIndex = 14;
+            this.label6.Text = "Shift:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(607, 228);
+            this.label7.Margin = new System.Windows.Forms.Padding(3, 4, 3, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(32, 13);
+            this.label7.TabIndex = 15;
+            this.label7.Text = "Gain:";
+            // 
             // CoefficientExport
             // 
             this.AcceptButton = this.okButton;
@@ -179,6 +270,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.okButton;
             this.ClientSize = new System.Drawing.Size(957, 499);
+            this.Controls.Add(this.formatBox);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.lineLengthSelect);
@@ -206,5 +298,12 @@
         private System.Windows.Forms.TextBox gain2Box;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox gain1Box;
+        private System.Windows.Forms.ComboBox formatBox;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.TextBox shift2Box;
+        private System.Windows.Forms.TextBox shift1Box;
     }
 }

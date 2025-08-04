@@ -31,11 +31,18 @@ namespace SpeakerEQDesigner {
                 filters1 = new List<BiquadFilter>(),
                 filters2 = new List<BiquadFilter>(),
                 response1 = new List<DPoint>(),
-                response2 = new List<DPoint>()
+                response2 = new List<DPoint>(),
+                fpFormatIndex = 0,
+                fpPostShift1 = 0,
+                fpPostShift2 = 0,
             };
             for (int i = 0; i < 7; i++) {
-                cfg.filters1.Add(new BiquadFilter());
-                cfg.filters2.Add(new BiquadFilter());
+                cfg.filters1.Add(new BiquadFilter {
+                    cfg = cfg
+                });
+                cfg.filters2.Add(new BiquadFilter {
+                    cfg = cfg
+                });
             }
             filterIndex = new int[] { 0, 0 };
             currFilter = new BiquadFilter[] { cfg.filters1[0], cfg.filters2[0] };
@@ -70,17 +77,18 @@ namespace SpeakerEQDesigner {
         private void OnFilterParamChange(int speaker) {
             var filt = currFilter[speaker];
             filt.UpdateFilter();
+            cfg.RecomputeFPShifts();
             blockUpdates = true;
             switch (speaker) {
                 case 0:
                     s1FreqSelect.Value = filt.Frequency;
                     s1QSelect.Value = filt.Q;
                     s1GainSelect.Value = filt.Gain;
-                    s1b0Select.Value = filt.b0;
-                    s1b1Select.Value = filt.b1;
-                    s1b2Select.Value = filt.b2;
-                    s1a1Select.Value = filt.a1;
-                    s1a2Select.Value = filt.a2;
+                    s1b0Select.Value = filt.rounded_b0;
+                    s1b1Select.Value = filt.rounded_b1;
+                    s1b2Select.Value = filt.rounded_b2;
+                    s1a1Select.Value = filt.rounded_a1;
+                    s1a2Select.Value = filt.rounded_a2;
                     s1a1Label.Text = filt.NegateA ? "-a1:" : "a1:";
                     s1a2Label.Text = filt.NegateA ? "-a2:" : "a2:";
                     s1b0Hex.Text = filt.FP_b0.ToString("X8");
@@ -91,17 +99,18 @@ namespace SpeakerEQDesigner {
                     s1NegBox.Checked = filt.NegateA;
                     s1SRSelect.Value = filt.SampleRate;
                     s1SpkGainSelect.Value = (decimal)cfg.gain1;
+                    s1Shift.Text = cfg.fpPostShift1.ToString();
                     s1PlotView.InvalidatePlot(true);
                     break;
                 case 1:
                     s2FreqSelect.Value = filt.Frequency;
                     s2QSelect.Value = filt.Q;
                     s2GainSelect.Value = filt.Gain;
-                    s2b0Select.Value = filt.b0;
-                    s2b1Select.Value = filt.b1;
-                    s2b2Select.Value = filt.b2;
-                    s2a1Select.Value = filt.a1;
-                    s2a2Select.Value = filt.a2;
+                    s2b0Select.Value = filt.rounded_b0;
+                    s2b1Select.Value = filt.rounded_b1;
+                    s2b2Select.Value = filt.rounded_b2;
+                    s2a1Select.Value = filt.rounded_a1;
+                    s2a2Select.Value = filt.rounded_a2;
                     s2a1Label.Text = filt.NegateA ? "-a1:" : "a1:";
                     s2a2Label.Text = filt.NegateA ? "-a2:" : "a2:";
                     s2b0Hex.Text = filt.FP_b0.ToString("X8");
@@ -112,6 +121,7 @@ namespace SpeakerEQDesigner {
                     s2NegBox.Checked = filt.NegateA;
                     s2SRSelect.Value = filt.SampleRate;
                     s2SpkGainSelect.Value = (decimal)cfg.gain2;
+                    s2Shift.Text = cfg.fpPostShift2.ToString();
                     s2PlotView.InvalidatePlot(true);
                     break;
             }
@@ -134,7 +144,9 @@ namespace SpeakerEQDesigner {
         private void FiltAdd_Click(object sender, EventArgs e) {
             var but = (Button)sender;
             int spk = (int)but.Tag;
-            cfg.Filters(spk).Add(new BiquadFilter());
+            cfg.Filters(spk).Add(new BiquadFilter {
+                cfg = cfg
+            });
             switch (spk) {
                 case 0:
                     s1FiltSelect.Maximum = cfg.Filters(spk).Count;
@@ -465,24 +477,104 @@ namespace SpeakerEQDesigner {
             var stream = File.OpenRead(path);
             cfg = (Config)cfgSer.Deserialize(stream);
             stream.Close();
-            foreach (var f in cfg.filters1) f.UpdateFilter();
-            foreach (var f in cfg.filters2) f.UpdateFilter();
+            foreach (var f in cfg.filters1) {
+                f.cfg = cfg;
+                f.UpdateFilter();
+            }
+            foreach (var f in cfg.filters2) {
+                f.cfg = cfg;
+                f.UpdateFilter();
+            }
             s1FiltSelect.Value = s2FiltSelect.Value = 1;
             filterIndex = new int[] { 0, 0 };
             currFilter = new BiquadFilter[] { cfg.filters1[0], cfg.filters2[0] };
             s1FiltSelect.Maximum = cfg.filters1.Count;
             s2FiltSelect.Maximum = cfg.filters2.Count;
-            OnFilterTypeSelect(0);
-            OnFilterTypeSelect(1);
+            SelectFPFormat(cfg.fpFormatIndex);
             sumSPLSeries.LineSeries1 = s1SPLSeries.LineSeries = cfg.response1;
             sumSPLSeries.LineSeries2 = s2SPLSeries.LineSeries = cfg.response2;
         }
+
+        private void format523toolStripMenuItem_Click(object sender, EventArgs e) {
+            SelectFPFormat(0);
+        }
+
+        private void format131toolStripMenuItem_Click(object sender, EventArgs e) {
+            SelectFPFormat(1);
+        }
+
+        private void RecalculateShifts(object sender, EventArgs e) {
+            foreach (var f in cfg.filters1) {
+                f.UpdateFilter();
+            }
+            foreach (var f in cfg.filters2) {
+                f.UpdateFilter();
+            }
+
+            cfg.RecomputeFPShifts();
+        }
+
+        private void SelectFPFormat(int format) {
+            if (format > 1) {
+                throw new ArgumentException("Invalid FP format!");
+            }
+
+            cfg.SetFPFormat(format);
+            if (format == 0) {
+                format523toolStripMenuItem.Checked = true;
+                format131toolStripMenuItem.Checked = false;
+            } else if (format == 1) {
+                format523toolStripMenuItem.Checked = false;
+                format131toolStripMenuItem.Checked = true;
+            }
+
+            OnFilterTypeSelect(0);
+            OnFilterTypeSelect(1);
+        }
     }
 
-    public struct Config {
+    public class Config {
+        //FP formats: 0 = 5.23, 1 = 1.31
+        public readonly decimal[] FPMults = { 8388608m, 2147483648m };
+        public readonly decimal[] FPMins = { -16m, -1m };
+        public readonly decimal[] FPMaxs = { 15.99999988079071m, 0.9999999995343387m };
+
         public List<DPoint> response1, response2;
         public List<BiquadFilter> filters1, filters2;
         public double gain1, gain2;
+
+        public int fpFormatIndex;
+        public decimal FPMult { get => FPMults[fpFormatIndex]; }
+        public decimal FPMin { get => FPMins[fpFormatIndex]; }
+        public decimal FPMax { get => FPMaxs[fpFormatIndex]; }
+
+        public int fpPostShift1, fpPostShift2;
+
+        public void SetFPFormat(int format) {
+            if (fpFormatIndex == format) return;
+
+            fpFormatIndex = format;
+
+            foreach (var f in filters1) {
+                f.UpdateFilter();
+            }
+            foreach (var f in filters2) {
+                f.UpdateFilter();
+            }
+            RecomputeFPShifts();
+        }
+
+        public void RecomputeFPShifts() {
+            fpPostShift1 = filters1.Max(f => f.FP_shift);
+            foreach (var f in filters1) {
+                f.RecomputeFPForGivenShift(fpPostShift1);
+            }
+
+            fpPostShift2 = filters2.Max(f => f.FP_shift);
+            foreach (var f in filters2) {
+                f.RecomputeFPForGivenShift(fpPostShift2);
+            }
+        }
 
         public List<DPoint> Response(int speaker) {
             return speaker == 0 ? response1 : response2;

@@ -25,11 +25,25 @@
         private void InitializeComponent() {
             this.sumPlotView = new OxyPlot.WindowsForms.PlotView();
             this.mainSplit = new System.Windows.Forms.SplitContainer();
+            this.flatnessStdDevBox = new System.Windows.Forms.TextBox();
+            this.label25 = new System.Windows.Forms.Label();
+            this.label24 = new System.Windows.Forms.Label();
+            this.flatnessPeakBox = new System.Windows.Forms.TextBox();
+            this.flatnessMeanBox = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.flatnessEndSel = new System.Windows.Forms.NumericUpDown();
+            this.flatnessStartSel = new System.Windows.Forms.NumericUpDown();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportCoefficientsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.setupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.formatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.format523toolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.format131toolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mainTableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.s2TableLayoutPanel = new System.Windows.Forms.TableLayoutPanel();
             this.s2Panel1 = new System.Windows.Forms.Panel();
@@ -49,7 +63,9 @@
             this.s2FiltSelect = new System.Windows.Forms.NumericUpDown();
             this.label14 = new System.Windows.Forms.Label();
             this.s2Panel2 = new System.Windows.Forms.Panel();
+            this.label27 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
+            this.s2Shift = new System.Windows.Forms.TextBox();
             this.s2SpkGainSelect = new System.Windows.Forms.NumericUpDown();
             this.label15 = new System.Windows.Forms.Label();
             this.s2b0Hex = new System.Windows.Forms.TextBox();
@@ -89,6 +105,8 @@
             this.s1FiltSelect = new System.Windows.Forms.NumericUpDown();
             this.label1 = new System.Windows.Forms.Label();
             this.s1Panel2 = new System.Windows.Forms.Panel();
+            this.label26 = new System.Windows.Forms.Label();
+            this.s1Shift = new System.Windows.Forms.TextBox();
             this.label17 = new System.Windows.Forms.Label();
             this.s1SpkGainSelect = new System.Windows.Forms.NumericUpDown();
             this.label9 = new System.Windows.Forms.Label();
@@ -111,20 +129,12 @@
             this.s1b2Hex = new System.Windows.Forms.TextBox();
             this.openDialog = new System.Windows.Forms.OpenFileDialog();
             this.saveDialog = new System.Windows.Forms.SaveFileDialog();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.flatnessStartSel = new System.Windows.Forms.NumericUpDown();
-            this.flatnessEndSel = new System.Windows.Forms.NumericUpDown();
-            this.label23 = new System.Windows.Forms.Label();
-            this.flatnessMeanBox = new System.Windows.Forms.TextBox();
-            this.flatnessPeakBox = new System.Windows.Forms.TextBox();
-            this.label24 = new System.Windows.Forms.Label();
-            this.label25 = new System.Windows.Forms.Label();
-            this.flatnessStdDevBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.mainSplit)).BeginInit();
             this.mainSplit.Panel1.SuspendLayout();
             this.mainSplit.Panel2.SuspendLayout();
             this.mainSplit.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.flatnessEndSel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.flatnessStartSel)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.mainTableLayoutPanel.SuspendLayout();
             this.s2TableLayoutPanel.SuspendLayout();
@@ -157,8 +167,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.s1a2Select)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.s1b2Select)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.s1a1Select)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.flatnessStartSel)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.flatnessEndSel)).BeginInit();
             this.SuspendLayout();
             // 
             // sumPlotView
@@ -170,7 +178,7 @@
             this.sumPlotView.Location = new System.Drawing.Point(0, 54);
             this.sumPlotView.Name = "sumPlotView";
             this.sumPlotView.PanCursor = System.Windows.Forms.Cursors.Hand;
-            this.sumPlotView.Size = new System.Drawing.Size(954, 244);
+            this.sumPlotView.Size = new System.Drawing.Size(954, 205);
             this.sumPlotView.TabIndex = 0;
             this.sumPlotView.Text = "plotView1";
             this.sumPlotView.ZoomHorizontalCursor = System.Windows.Forms.Cursors.SizeWE;
@@ -203,14 +211,139 @@
             // 
             this.mainSplit.Panel2.Controls.Add(this.mainTableLayoutPanel);
             this.mainSplit.Size = new System.Drawing.Size(954, 661);
-            this.mainSplit.SplitterDistance = 298;
+            this.mainSplit.SplitterDistance = 259;
             this.mainSplit.TabIndex = 2;
+            // 
+            // flatnessStdDevBox
+            // 
+            this.flatnessStdDevBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.flatnessStdDevBox.Location = new System.Drawing.Point(872, 27);
+            this.flatnessStdDevBox.Name = "flatnessStdDevBox";
+            this.flatnessStdDevBox.ReadOnly = true;
+            this.flatnessStdDevBox.Size = new System.Drawing.Size(79, 20);
+            this.flatnessStdDevBox.TabIndex = 11;
+            this.flatnessStdDevBox.Text = "0,000 dB";
+            // 
+            // label25
+            // 
+            this.label25.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label25.AutoSize = true;
+            this.label25.Location = new System.Drawing.Point(820, 30);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(46, 13);
+            this.label25.TabIndex = 10;
+            this.label25.Text = "StdDev:";
+            // 
+            // label24
+            // 
+            this.label24.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label24.AutoSize = true;
+            this.label24.Location = new System.Drawing.Point(667, 30);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(62, 13);
+            this.label24.TabIndex = 9;
+            this.label24.Text = "Peak-peak:";
+            // 
+            // flatnessPeakBox
+            // 
+            this.flatnessPeakBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.flatnessPeakBox.Location = new System.Drawing.Point(735, 27);
+            this.flatnessPeakBox.Name = "flatnessPeakBox";
+            this.flatnessPeakBox.ReadOnly = true;
+            this.flatnessPeakBox.Size = new System.Drawing.Size(79, 20);
+            this.flatnessPeakBox.TabIndex = 8;
+            this.flatnessPeakBox.Text = "0,00 dB";
+            // 
+            // flatnessMeanBox
+            // 
+            this.flatnessMeanBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.flatnessMeanBox.Location = new System.Drawing.Point(582, 27);
+            this.flatnessMeanBox.Name = "flatnessMeanBox";
+            this.flatnessMeanBox.ReadOnly = true;
+            this.flatnessMeanBox.Size = new System.Drawing.Size(79, 20);
+            this.flatnessMeanBox.TabIndex = 7;
+            this.flatnessMeanBox.Text = "90,00 dB";
+            // 
+            // label23
+            // 
+            this.label23.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label23.AutoSize = true;
+            this.label23.Location = new System.Drawing.Point(539, 30);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(37, 13);
+            this.label23.TabIndex = 6;
+            this.label23.Text = "Mean:";
+            // 
+            // flatnessEndSel
+            // 
+            this.flatnessEndSel.Location = new System.Drawing.Point(243, 27);
+            this.flatnessEndSel.Maximum = new decimal(new int[] {
+            30000,
+            0,
+            0,
+            0});
+            this.flatnessEndSel.Minimum = new decimal(new int[] {
+            11,
+            0,
+            0,
+            0});
+            this.flatnessEndSel.Name = "flatnessEndSel";
+            this.flatnessEndSel.Size = new System.Drawing.Size(69, 20);
+            this.flatnessEndSel.TabIndex = 5;
+            this.flatnessEndSel.Value = new decimal(new int[] {
+            30000,
+            0,
+            0,
+            0});
+            this.flatnessEndSel.ValueChanged += new System.EventHandler(this.flatnessSel_ValueChanged);
+            // 
+            // flatnessStartSel
+            // 
+            this.flatnessStartSel.Location = new System.Drawing.Point(112, 27);
+            this.flatnessStartSel.Maximum = new decimal(new int[] {
+            29999,
+            0,
+            0,
+            0});
+            this.flatnessStartSel.Minimum = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.flatnessStartSel.Name = "flatnessStartSel";
+            this.flatnessStartSel.Size = new System.Drawing.Size(68, 20);
+            this.flatnessStartSel.TabIndex = 4;
+            this.flatnessStartSel.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            this.flatnessStartSel.ValueChanged += new System.EventHandler(this.flatnessSel_ValueChanged);
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(186, 30);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(51, 13);
+            this.label22.TabIndex = 3;
+            this.label22.Text = "End (Hz):";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Location = new System.Drawing.Point(12, 29);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(94, 13);
+            this.label21.TabIndex = 2;
+            this.label21.Text = "Flatness start (Hz):";
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.exportCoefficientsToolStripMenuItem});
+            this.exportCoefficientsToolStripMenuItem,
+            this.setupToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(954, 24);
@@ -229,14 +362,14 @@
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
             this.loadToolStripMenuItem.Text = "Load";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
@@ -246,6 +379,39 @@
             this.exportCoefficientsToolStripMenuItem.Size = new System.Drawing.Size(117, 20);
             this.exportCoefficientsToolStripMenuItem.Text = "Export coefficients";
             this.exportCoefficientsToolStripMenuItem.Click += new System.EventHandler(this.exportCoefficientsToolStripMenuItem_Click);
+            // 
+            // setupToolStripMenuItem
+            // 
+            this.setupToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.formatToolStripMenuItem});
+            this.setupToolStripMenuItem.Name = "setupToolStripMenuItem";
+            this.setupToolStripMenuItem.Size = new System.Drawing.Size(49, 20);
+            this.setupToolStripMenuItem.Text = "Setup";
+            // 
+            // formatToolStripMenuItem
+            // 
+            this.formatToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.format523toolStripMenuItem,
+            this.format131toolStripMenuItem});
+            this.formatToolStripMenuItem.Name = "formatToolStripMenuItem";
+            this.formatToolStripMenuItem.Size = new System.Drawing.Size(173, 22);
+            this.formatToolStripMenuItem.Text = "Fixed Point Format";
+            // 
+            // format523toolStripMenuItem
+            // 
+            this.format523toolStripMenuItem.Checked = true;
+            this.format523toolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.format523toolStripMenuItem.Name = "format523toolStripMenuItem";
+            this.format523toolStripMenuItem.Size = new System.Drawing.Size(95, 22);
+            this.format523toolStripMenuItem.Text = "5.23";
+            this.format523toolStripMenuItem.Click += new System.EventHandler(this.format523toolStripMenuItem_Click);
+            // 
+            // format131toolStripMenuItem
+            // 
+            this.format131toolStripMenuItem.Name = "format131toolStripMenuItem";
+            this.format131toolStripMenuItem.Size = new System.Drawing.Size(95, 22);
+            this.format131toolStripMenuItem.Text = "1.31";
+            this.format131toolStripMenuItem.Click += new System.EventHandler(this.format131toolStripMenuItem_Click);
             // 
             // mainTableLayoutPanel
             // 
@@ -262,8 +428,8 @@
             this.mainTableLayoutPanel.Name = "mainTableLayoutPanel";
             this.mainTableLayoutPanel.RowCount = 2;
             this.mainTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.mainTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 195F));
-            this.mainTableLayoutPanel.Size = new System.Drawing.Size(954, 359);
+            this.mainTableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 214F));
+            this.mainTableLayoutPanel.Size = new System.Drawing.Size(954, 398);
             this.mainTableLayoutPanel.TabIndex = 0;
             // 
             // s2TableLayoutPanel
@@ -274,11 +440,11 @@
             this.s2TableLayoutPanel.Controls.Add(this.s2Panel1, 0, 0);
             this.s2TableLayoutPanel.Controls.Add(this.s2Panel2, 1, 0);
             this.s2TableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.s2TableLayoutPanel.Location = new System.Drawing.Point(480, 166);
+            this.s2TableLayoutPanel.Location = new System.Drawing.Point(480, 186);
             this.s2TableLayoutPanel.Name = "s2TableLayoutPanel";
             this.s2TableLayoutPanel.RowCount = 1;
             this.s2TableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.s2TableLayoutPanel.Size = new System.Drawing.Size(470, 189);
+            this.s2TableLayoutPanel.Size = new System.Drawing.Size(470, 208);
             this.s2TableLayoutPanel.TabIndex = 5;
             // 
             // s2Panel1
@@ -300,7 +466,7 @@
             this.s2Panel1.Location = new System.Drawing.Point(0, 0);
             this.s2Panel1.Margin = new System.Windows.Forms.Padding(0);
             this.s2Panel1.Name = "s2Panel1";
-            this.s2Panel1.Size = new System.Drawing.Size(211, 189);
+            this.s2Panel1.Size = new System.Drawing.Size(211, 208);
             this.s2Panel1.TabIndex = 0;
             // 
             // s2QCrit
@@ -537,7 +703,9 @@
             // 
             // s2Panel2
             // 
+            this.s2Panel2.Controls.Add(this.label27);
             this.s2Panel2.Controls.Add(this.label19);
+            this.s2Panel2.Controls.Add(this.s2Shift);
             this.s2Panel2.Controls.Add(this.s2SpkGainSelect);
             this.s2Panel2.Controls.Add(this.label15);
             this.s2Panel2.Controls.Add(this.s2b0Hex);
@@ -561,18 +729,39 @@
             this.s2Panel2.Location = new System.Drawing.Point(211, 0);
             this.s2Panel2.Margin = new System.Windows.Forms.Padding(0);
             this.s2Panel2.Name = "s2Panel2";
-            this.s2Panel2.Size = new System.Drawing.Size(259, 189);
+            this.s2Panel2.Size = new System.Drawing.Size(259, 208);
             this.s2Panel2.TabIndex = 2;
+            // 
+            // label27
+            // 
+            this.label27.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label27.AutoSize = true;
+            this.label27.Location = new System.Drawing.Point(155, 136);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(31, 13);
+            this.label27.TabIndex = 35;
+            this.label27.Text = "Shift:";
             // 
             // label19
             // 
             this.label19.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(133, 135);
+            this.label19.Location = new System.Drawing.Point(133, 161);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(54, 13);
             this.label19.TabIndex = 33;
             this.label19.Text = "Gain (dB):";
+            // 
+            // s2Shift
+            // 
+            this.s2Shift.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.s2Shift.Location = new System.Drawing.Point(192, 133);
+            this.s2Shift.Name = "s2Shift";
+            this.s2Shift.ReadOnly = true;
+            this.s2Shift.Size = new System.Drawing.Size(64, 20);
+            this.s2Shift.TabIndex = 34;
+            this.s2Shift.Text = "0";
+            this.s2Shift.DoubleClick += new System.EventHandler(this.RecalculateShifts);
             // 
             // s2SpkGainSelect
             // 
@@ -583,7 +772,7 @@
             0,
             0,
             65536});
-            this.s2SpkGainSelect.Location = new System.Drawing.Point(192, 133);
+            this.s2SpkGainSelect.Location = new System.Drawing.Point(192, 159);
             this.s2SpkGainSelect.Minimum = new decimal(new int[] {
             100,
             0,
@@ -599,7 +788,7 @@
             // 
             this.label15.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(37, 160);
+            this.label15.Location = new System.Drawing.Point(37, 186);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(93, 13);
             this.label15.TabIndex = 30;
@@ -618,7 +807,7 @@
             // s2SRSelect
             // 
             this.s2SRSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.s2SRSelect.Location = new System.Drawing.Point(136, 158);
+            this.s2SRSelect.Location = new System.Drawing.Point(136, 184);
             this.s2SRSelect.Maximum = new decimal(new int[] {
             400000,
             0,
@@ -891,7 +1080,7 @@
             this.s2PlotView.Location = new System.Drawing.Point(480, 4);
             this.s2PlotView.Name = "s2PlotView";
             this.s2PlotView.PanCursor = System.Windows.Forms.Cursors.Hand;
-            this.s2PlotView.Size = new System.Drawing.Size(470, 155);
+            this.s2PlotView.Size = new System.Drawing.Size(470, 175);
             this.s2PlotView.TabIndex = 4;
             this.s2PlotView.Text = "plotView1";
             this.s2PlotView.ZoomHorizontalCursor = System.Windows.Forms.Cursors.SizeWE;
@@ -905,7 +1094,7 @@
             this.s1PlotView.Location = new System.Drawing.Point(4, 4);
             this.s1PlotView.Name = "s1PlotView";
             this.s1PlotView.PanCursor = System.Windows.Forms.Cursors.Hand;
-            this.s1PlotView.Size = new System.Drawing.Size(469, 155);
+            this.s1PlotView.Size = new System.Drawing.Size(469, 175);
             this.s1PlotView.TabIndex = 1;
             this.s1PlotView.Text = "plotView1";
             this.s1PlotView.ZoomHorizontalCursor = System.Windows.Forms.Cursors.SizeWE;
@@ -920,11 +1109,11 @@
             this.s1TableLayoutPanel.Controls.Add(this.s1Panel1, 0, 0);
             this.s1TableLayoutPanel.Controls.Add(this.s1Panel2, 1, 0);
             this.s1TableLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.s1TableLayoutPanel.Location = new System.Drawing.Point(4, 166);
+            this.s1TableLayoutPanel.Location = new System.Drawing.Point(4, 186);
             this.s1TableLayoutPanel.Name = "s1TableLayoutPanel";
             this.s1TableLayoutPanel.RowCount = 1;
             this.s1TableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.s1TableLayoutPanel.Size = new System.Drawing.Size(469, 189);
+            this.s1TableLayoutPanel.Size = new System.Drawing.Size(469, 208);
             this.s1TableLayoutPanel.TabIndex = 3;
             // 
             // s1Panel1
@@ -946,7 +1135,7 @@
             this.s1Panel1.Location = new System.Drawing.Point(0, 0);
             this.s1Panel1.Margin = new System.Windows.Forms.Padding(0);
             this.s1Panel1.Name = "s1Panel1";
-            this.s1Panel1.Size = new System.Drawing.Size(211, 189);
+            this.s1Panel1.Size = new System.Drawing.Size(211, 208);
             this.s1Panel1.TabIndex = 0;
             // 
             // s1QCrit
@@ -1183,6 +1372,8 @@
             // 
             // s1Panel2
             // 
+            this.s1Panel2.Controls.Add(this.label26);
+            this.s1Panel2.Controls.Add(this.s1Shift);
             this.s1Panel2.Controls.Add(this.label17);
             this.s1Panel2.Controls.Add(this.s1SpkGainSelect);
             this.s1Panel2.Controls.Add(this.label9);
@@ -1207,14 +1398,35 @@
             this.s1Panel2.Location = new System.Drawing.Point(211, 0);
             this.s1Panel2.Margin = new System.Windows.Forms.Padding(0);
             this.s1Panel2.Name = "s1Panel2";
-            this.s1Panel2.Size = new System.Drawing.Size(258, 189);
+            this.s1Panel2.Size = new System.Drawing.Size(258, 208);
             this.s1Panel2.TabIndex = 2;
+            // 
+            // label26
+            // 
+            this.label26.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.label26.AutoSize = true;
+            this.label26.Location = new System.Drawing.Point(154, 136);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(31, 13);
+            this.label26.TabIndex = 33;
+            this.label26.Text = "Shift:";
+            // 
+            // s1Shift
+            // 
+            this.s1Shift.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.s1Shift.Location = new System.Drawing.Point(191, 133);
+            this.s1Shift.Name = "s1Shift";
+            this.s1Shift.ReadOnly = true;
+            this.s1Shift.Size = new System.Drawing.Size(64, 20);
+            this.s1Shift.TabIndex = 32;
+            this.s1Shift.Text = "0";
+            this.s1Shift.DoubleClick += new System.EventHandler(this.RecalculateShifts);
             // 
             // label17
             // 
             this.label17.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(132, 135);
+            this.label17.Location = new System.Drawing.Point(132, 160);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(54, 13);
             this.label17.TabIndex = 31;
@@ -1229,7 +1441,7 @@
             0,
             0,
             65536});
-            this.s1SpkGainSelect.Location = new System.Drawing.Point(191, 133);
+            this.s1SpkGainSelect.Location = new System.Drawing.Point(191, 158);
             this.s1SpkGainSelect.Minimum = new decimal(new int[] {
             100,
             0,
@@ -1245,7 +1457,7 @@
             // 
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(36, 160);
+            this.label9.Location = new System.Drawing.Point(36, 185);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(93, 13);
             this.label9.TabIndex = 30;
@@ -1264,7 +1476,7 @@
             // s1SRSelect
             // 
             this.s1SRSelect.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.s1SRSelect.Location = new System.Drawing.Point(135, 158);
+            this.s1SRSelect.Location = new System.Drawing.Point(135, 184);
             this.s1SRSelect.Maximum = new decimal(new int[] {
             400000,
             0,
@@ -1539,130 +1751,6 @@
             // 
             this.saveDialog.Filter = "XML files|*.xml";
             // 
-            // label21
-            // 
-            this.label21.AutoSize = true;
-            this.label21.Location = new System.Drawing.Point(12, 29);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(94, 13);
-            this.label21.TabIndex = 2;
-            this.label21.Text = "Flatness start (Hz):";
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Location = new System.Drawing.Point(186, 30);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(51, 13);
-            this.label22.TabIndex = 3;
-            this.label22.Text = "End (Hz):";
-            // 
-            // flatnessStartSel
-            // 
-            this.flatnessStartSel.Location = new System.Drawing.Point(112, 27);
-            this.flatnessStartSel.Maximum = new decimal(new int[] {
-            29999,
-            0,
-            0,
-            0});
-            this.flatnessStartSel.Minimum = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.flatnessStartSel.Name = "flatnessStartSel";
-            this.flatnessStartSel.Size = new System.Drawing.Size(68, 20);
-            this.flatnessStartSel.TabIndex = 4;
-            this.flatnessStartSel.Value = new decimal(new int[] {
-            10,
-            0,
-            0,
-            0});
-            this.flatnessStartSel.ValueChanged += new System.EventHandler(this.flatnessSel_ValueChanged);
-            // 
-            // flatnessEndSel
-            // 
-            this.flatnessEndSel.Location = new System.Drawing.Point(243, 27);
-            this.flatnessEndSel.Maximum = new decimal(new int[] {
-            30000,
-            0,
-            0,
-            0});
-            this.flatnessEndSel.Minimum = new decimal(new int[] {
-            11,
-            0,
-            0,
-            0});
-            this.flatnessEndSel.Name = "flatnessEndSel";
-            this.flatnessEndSel.Size = new System.Drawing.Size(69, 20);
-            this.flatnessEndSel.TabIndex = 5;
-            this.flatnessEndSel.Value = new decimal(new int[] {
-            30000,
-            0,
-            0,
-            0});
-            this.flatnessEndSel.ValueChanged += new System.EventHandler(this.flatnessSel_ValueChanged);
-            // 
-            // label23
-            // 
-            this.label23.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label23.AutoSize = true;
-            this.label23.Location = new System.Drawing.Point(539, 30);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(37, 13);
-            this.label23.TabIndex = 6;
-            this.label23.Text = "Mean:";
-            // 
-            // flatnessMeanBox
-            // 
-            this.flatnessMeanBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.flatnessMeanBox.Location = new System.Drawing.Point(582, 27);
-            this.flatnessMeanBox.Name = "flatnessMeanBox";
-            this.flatnessMeanBox.ReadOnly = true;
-            this.flatnessMeanBox.Size = new System.Drawing.Size(79, 20);
-            this.flatnessMeanBox.TabIndex = 7;
-            this.flatnessMeanBox.Text = "90,00 dB";
-            // 
-            // flatnessPeakBox
-            // 
-            this.flatnessPeakBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.flatnessPeakBox.Location = new System.Drawing.Point(735, 27);
-            this.flatnessPeakBox.Name = "flatnessPeakBox";
-            this.flatnessPeakBox.ReadOnly = true;
-            this.flatnessPeakBox.Size = new System.Drawing.Size(79, 20);
-            this.flatnessPeakBox.TabIndex = 8;
-            this.flatnessPeakBox.Text = "0,00 dB";
-            // 
-            // label24
-            // 
-            this.label24.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label24.AutoSize = true;
-            this.label24.Location = new System.Drawing.Point(667, 30);
-            this.label24.Name = "label24";
-            this.label24.Size = new System.Drawing.Size(62, 13);
-            this.label24.TabIndex = 9;
-            this.label24.Text = "Peak-peak:";
-            // 
-            // label25
-            // 
-            this.label25.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.label25.AutoSize = true;
-            this.label25.Location = new System.Drawing.Point(820, 30);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(46, 13);
-            this.label25.TabIndex = 10;
-            this.label25.Text = "StdDev:";
-            // 
-            // flatnessStdDevBox
-            // 
-            this.flatnessStdDevBox.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.flatnessStdDevBox.Location = new System.Drawing.Point(872, 27);
-            this.flatnessStdDevBox.Name = "flatnessStdDevBox";
-            this.flatnessStdDevBox.ReadOnly = true;
-            this.flatnessStdDevBox.Size = new System.Drawing.Size(79, 20);
-            this.flatnessStdDevBox.TabIndex = 11;
-            this.flatnessStdDevBox.Text = "0,000 dB";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1679,6 +1767,8 @@
             this.mainSplit.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.mainSplit)).EndInit();
             this.mainSplit.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.flatnessEndSel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.flatnessStartSel)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.mainTableLayoutPanel.ResumeLayout(false);
@@ -1716,8 +1806,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.s1a2Select)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.s1b2Select)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.s1a1Select)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.flatnessStartSel)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.flatnessEndSel)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1822,6 +1910,14 @@
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.TextBox flatnessStdDevBox;
         private System.Windows.Forms.Label label25;
+        private System.Windows.Forms.ToolStripMenuItem setupToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem formatToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem format523toolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem format131toolStripMenuItem;
+        private System.Windows.Forms.TextBox s1Shift;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.TextBox s2Shift;
+        private System.Windows.Forms.Label label26;
     }
 }
 
